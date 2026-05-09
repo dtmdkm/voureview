@@ -65,6 +65,11 @@ export default async function HomePage() {
       {/* 3. Alphabet Filter & Store List */}
       <section className="coupon-stores-sec container">
         <AlphabetFilter stores={stores} />
+        <div className="text-center" style={{ marginTop: '40px' }}>
+          <Link href="/stores" className="btn-see-more">
+            See More Stores
+          </Link>
+        </div>
       </section>
 
       {/* 4. Top Picks */}
