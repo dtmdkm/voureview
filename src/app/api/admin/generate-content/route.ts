@@ -43,6 +43,12 @@ export async function POST(request: Request) {
         Output rules: Return HTML fragment only (<p>, <strong>). 2 short paragraphs.
         First: what products belong here. Second: why browse for deals here.
       `;
+    } else if (type === 'store_short') {
+      prompt = `
+        Write a very concise, punchy 1-2 sentence description for the brand "${brandName}".
+        Context: ${description}.
+        Output rules: Plain text only, NO HTML. Max 160 characters. Focus on what they sell and the main benefit.
+      `;
     }
 
     const content = await generateWithAI(prompt);

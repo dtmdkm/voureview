@@ -224,6 +224,31 @@ export default function ClientPage({ initialStores, categories, events, dealStat
     }
   };
 
+  const [generatingShortAI, setGeneratingShortAI] = useState(false);
+  const handleGenerateShortDesc = async () => {
+    if (!editingStore?.name) return alert('Vui lòng nhập tên Cửa hàng trước!');
+    const name = editingStore.name;
+    const detailContent = editingStore.content || '';
+
+    setGeneratingShortAI(true);
+    try {
+      const res = await fetch('/api/admin/generate-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'store_short', brandName: name, description: detailContent }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      
+      setEditingStore((prev: any) => ({ ...prev, description: data.content }));
+      alert('Đã tạo mô tả ngắn thành công!');
+    } catch (err: any) {
+      alert('Lỗi: ' + err.message);
+    } finally {
+      setGeneratingShortAI(false);
+    }
+  };
+
   const filtered = stores.filter(s =>
     s.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     s.slug?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -534,7 +559,13 @@ export default function ClientPage({ initialStores, categories, events, dealStat
                 {/* Tab: Content */}
                 <TabsContent value="content" className="space-y-8 animate-in fade-in duration-300">
                   <div className="space-y-3">
-                    <Label className="text-[13px] font-black text-slate-700 ml-1">Mô tả ngắn</Label>
+                    <div className="flex items-center justify-between px-1">
+                      <Label className="text-[13px] font-black text-slate-700 ml-1">Mô tả ngắn</Label>
+                      <Button type="button" variant="ghost" size="sm" onClick={handleGenerateShortDesc} disabled={generatingShortAI} className="h-9 px-4 rounded-xl text-indigo-600 bg-indigo-50 hover:bg-indigo-100 font-bold gap-2">
+                        {generatingShortAI ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                        {generatingShortAI ? 'AI đang viết...' : 'Viết bằng AI'}
+                      </Button>
+                    </div>
                     <Textarea name="description" value={editingStore?.description || ''} onChange={handleInputChange} rows={3} className="rounded-3xl border-slate-200 p-5 font-medium leading-relaxed" />
                   </div>
                   <div className="space-y-4">
