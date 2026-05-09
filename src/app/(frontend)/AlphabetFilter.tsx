@@ -81,9 +81,6 @@ export default function AlphabetFilter({ stores }: Props) {
         )}
       </ul>
 
-      <div className="see-more-stores-btn">
-        <Link prefetch={false} href="/stores">See More Stores</Link>
-      </div>
     </div>
   );
 }

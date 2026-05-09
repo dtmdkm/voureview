@@ -1410,13 +1410,13 @@ aside { position: sticky; top: 100px; }
 .btn-see-more {
   display: inline-block;
   padding: 14px 40px;
-  background: linear-gradient(135deg, #ff8a65 0%, #ff5252 100%);
+  background: #3258b3;
   color: white;
   font-weight: 600;
   font-size: 1.05rem;
   text-decoration: none;
   border-radius: 50px;
-  box-shadow: 0 8px 20px rgba(255, 82, 82, 0.4);
+  box-shadow: 0 8px 20px rgba(50, 88, 179, 0.3);
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
@@ -1425,7 +1425,7 @@ aside { position: sticky; top: 100px; }
 
 .btn-see-more:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(255, 82, 82, 0.5);
+  box-shadow: 0 12px 25px rgba(50, 88, 179, 0.4);
   filter: brightness(1.1);
   color: white;
 }
