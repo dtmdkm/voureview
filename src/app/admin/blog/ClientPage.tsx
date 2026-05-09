@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import ImageUpload from '@/components/ImageUpload';
 
 const EMPTY_POST = { title: '', slug: '', content: '', excerpt: '', image: '', tags: '', status: 'published', seoTitle: '', seoKeywords: '', seoDescription: '' };
 
@@ -438,20 +439,11 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
                         />
                       </div>
                       <div className="space-y-3">
-                        <Label className="text-[14px] font-black text-slate-800 ml-1 uppercase tracking-wider flex items-center gap-2">
-                          <ImageIcon className="h-4 w-4 text-indigo-500" />Ảnh đại diện (Cover Image)
-                        </Label>
-                        <div className="relative group">
-                           <input 
-                            className="w-full h-14 px-6 rounded-2xl border border-slate-200 bg-white text-sm font-medium focus:outline-none focus:border-indigo-500 transition-all pr-14 shadow-sm" 
-                            value={formData.image} 
-                            onChange={e => set('image', e.target.value)} 
-                            placeholder="Dán link ảnh tại đây hoặc tải lên..." 
-                          />
-                          <div className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center">
-                            <ImageIcon className="h-4 w-4 text-slate-300" />
-                          </div>
-                        </div>
+                        <ImageUpload 
+                          label="Ảnh đại diện (Cover Image)" 
+                          value={formData.image} 
+                          onChange={(url) => set('image', url)} 
+                        />
                       </div>
                     </div>
                     <div className="space-y-8">
