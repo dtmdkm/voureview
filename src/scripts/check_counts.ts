@@ -10,7 +10,7 @@ async function check() {
     for (const dbName of dbs) {
       console.log(`\n--- Kiểm tra Database: ${dbName} ---`);
       const db = conn.useDb(dbName);
-      const collections = await db.db.listCollections().toArray();
+      const collections = await db.db!.listCollections().toArray();
       for (const col of collections) {
         const count = await db.collection(col.name).countDocuments();
         console.log(`- Collection: ${col.name} | Số lượng: ${count}`);
