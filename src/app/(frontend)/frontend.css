@@ -341,7 +341,7 @@ header.site-header {
 .save-badge::before { top: -8px; }
 .save-badge::after { bottom: -8px; }
 
-.save-badge .amount { font-size: 1.25rem; font-weight: 900; color: #3258b3; text-align: center; white-space: nowrap; }
+.save-badge .amount { font-size: 1.25rem; font-weight: 900; color: #eb004a; text-align: center; white-space: nowrap; }
 .save-badge .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin-top: 4px; text-align: center; }
 
 .coupon-info { flex: 1; padding: 25px 35px; display: flex; flex-direction: column; justify-content: center; }
@@ -937,7 +937,7 @@ aside { position: sticky; top: 100px; }
   align-items: center;
   border-right: 1px dashed #f1f5f9;
   padding: 20px;
-  color: #3258b3;
+  color: #eb004a;
 }
 .deal-thumb .amount { font-size: 1.6rem; font-weight: 800; line-height: 1.2; text-align: center; }
 .deal-thumb .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
@@ -1102,7 +1102,7 @@ aside { position: sticky; top: 100px; }
 .coupon-items .image h3 { font-size: 1rem; margin: 0; color: #000; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .coupon-items .coupon { flex: 1; text-align: center; }
 .coupon-items .coupon-count { font-size: 0.9rem; color: #666; font-weight: 500; }
-.coupon-items .cash-back { flex: 0 0 150px; text-align: center; color: var(--accent); font-weight: 700; }
+.coupon-items .cash-back { flex: 0 0 150px; text-align: center; color: #eb004a; font-weight: 700; }
 .coupon-items .coupon-items-btn { flex: 0 0 150px; text-align: right; }
 .coupon-items .coupon-items-btn span { padding: 8px 25px; border: 1px solid var(--navy); border-radius: 30px; color: var(--navy); font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
 .coupon-items a:hover .coupon-items-btn span { background: var(--navy); color: white; box-shadow: 0 5px 15px rgba(255, 87, 91, 0.2); }
