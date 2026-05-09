@@ -3,20 +3,27 @@ import { connectToDatabase } from '@/lib/mongodb';
 import { Category, Store } from '@/models';
 import Link from 'next/link';
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
   await connectToDatabase();
-  const categories = await Category.find({}).select('slug').lean();
+  const categories = await Category.find({}).select('slug name').lean();
   return categories.map((cat: any) => ({
-    slug: cat.slug || '',
+    slug: cat.slug || cat.name?.toLowerCase().replace(/\s+/g, '-') || 'unknown',
   }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   await connectToDatabase();
-  const category = await Category.findOne({ slug: resolvedParams.slug }).lean();
+  
+  const nameFromSlug = resolvedParams.slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+  const category = await Category.findOne({ 
+    $or: [
+      { slug: resolvedParams.slug },
+      { name: { $regex: new RegExp(`^${nameFromSlug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } }
+    ]
+  }).lean();
   
   if (!category) return { title: 'Category Not Found' };
   
@@ -31,15 +38,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const resolvedParams = await params;
   await connectToDatabase();
   
-  let category = await Category.findOne({ slug: resolvedParams.slug }).lean();
+  const nameFromSlug = resolvedParams.slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
   
-  if (!category) {
-    // Thử tìm theo tên (thay dấu gạch ngang bằng dấu cách)
-    const nameFromSlug = resolvedParams.slug.replace(/-/g, ' ');
-    category = await Category.findOne({ 
-      name: { $regex: new RegExp(`^${nameFromSlug}$`, 'i') } 
-    }).lean();
-  }
+  let category = await Category.findOne({ 
+    $or: [
+      { slug: resolvedParams.slug },
+      { name: { $regex: new RegExp(`^${nameFromSlug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } }
+    ]
+  }).lean();
   
   if (!category) {
     notFound();
