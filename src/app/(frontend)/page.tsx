@@ -18,7 +18,7 @@ const defaultBanners = [
 export default async function HomePage() {
   await connectToDatabase();
 
-  const [popularStores, deals, blogPosts, bannerSetting] = await Promise.all([
+  const [popularStores, deals, blogPosts, popularCategories, bannerSetting] = await Promise.all([
     Store.find({ status: 'active' })
       .sort({ isFeatured: -1, createdAt: -1 })
       .limit(24)
