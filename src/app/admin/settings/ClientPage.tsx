@@ -258,11 +258,78 @@ export default function SettingsClientPage({ initialSettings }: { initialSetting
               </div>
             </TabsContent>
 
-            <TabsContent value="advanced" className="m-0 py-20 text-center animate-in fade-in-50 duration-500">
-              <div className="max-w-md mx-auto space-y-4">
-                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100"><Globe className="h-8 w-8 text-slate-300" /></div>
-                <h3 className="text-[17px] font-bold text-slate-900">Advanced Features</h3>
-                <p className="text-sm text-slate-500 font-medium">Advanced SEO, Sitemap, and Analytics integration will be available in the next update.</p>
+            <TabsContent value="advanced" className="m-0 space-y-10 animate-in fade-in-50 duration-500">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                {/* OpenAI Section */}
+                <div className="bg-slate-50/50 border border-slate-100 rounded-[24px] p-8 space-y-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-slate-100 shadow-sm">
+                      <Sparkles className="h-5 w-5 text-[#eb004a]" />
+                    </div>
+                    <div>
+                      <h3 className="text-[16px] font-extrabold text-slate-900 tracking-tight">OpenAI Configuration</h3>
+                      <p className="text-[11px] text-slate-400 font-medium">Powering the AI Writer & SEO tools</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label className="text-[13px] font-bold text-slate-700 ml-1">OpenAI API Key</Label>
+                      <Input 
+                        type="password"
+                        value={settings.openai_api_key || ''} 
+                        onChange={e => set('openai_api_key', e.target.value)} 
+                        placeholder="sk-..." 
+                        className="h-11 rounded-xl bg-white border-slate-200" 
+                      />
+                      <p className="text-[10px] text-slate-400 font-medium px-1">Mã khóa được bảo mật và không bao giờ hiển thị ngoài Admin.</p>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-[13px] font-bold text-slate-700 ml-1">Model Name</Label>
+                      <Input 
+                        value={settings.openai_model || ''} 
+                        onChange={e => set('openai_model', e.target.value)} 
+                        placeholder="gpt-4o-mini" 
+                        className="h-11 rounded-xl bg-white border-slate-200" 
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gemini Section */}
+                <div className="bg-slate-50/50 border border-slate-100 rounded-[24px] p-8 space-y-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-slate-100 shadow-sm">
+                      <Globe className="h-5 w-5 text-indigo-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-[16px] font-extrabold text-slate-900 tracking-tight">Google Gemini Configuration</h3>
+                      <p className="text-[11px] text-slate-400 font-medium">Alternative high-speed AI engine</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label className="text-[13px] font-bold text-slate-700 ml-1">Gemini API Key</Label>
+                      <Input 
+                        type="password"
+                        value={settings.gemini_api_key || ''} 
+                        onChange={e => set('gemini_api_key', e.target.value)} 
+                        placeholder="Mã API từ Google AI Studio" 
+                        className="h-11 rounded-xl bg-white border-slate-200" 
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-[13px] font-bold text-slate-700 ml-1">Model Name</Label>
+                      <Input 
+                        value={settings.gemini_model || ''} 
+                        onChange={e => set('gemini_model', e.target.value)} 
+                        placeholder="gemini-1.5-flash" 
+                        className="h-11 rounded-xl bg-white border-slate-200" 
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </TabsContent>
           </div>

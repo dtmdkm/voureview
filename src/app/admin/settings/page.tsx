@@ -20,6 +20,10 @@ export default async function AdminSettings() {
     footer_resources: [],
     footer_company: [],
     footer_notices: [],
+    openai_api_key: '',
+    openai_model: 'gpt-4o-mini',
+    gemini_api_key: '',
+    gemini_model: 'gemini-pro',
   });
 
   return <SettingsClientPage initialSettings={settings} />;
