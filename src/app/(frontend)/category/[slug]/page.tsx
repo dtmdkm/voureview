@@ -37,13 +37,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   await connectToDatabase();
+
+  const rawSlug = decodeURIComponent(resolvedParams.slug);
+  const nameFromSlug = rawSlug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
   
-  const nameFromSlug = resolvedParams.slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
-  
+  // Tạo regex linh hoạt cho cả 'and' và '&'
+  const flexiblePattern = nameFromSlug
+    .replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escape regex chars
+    .replace(/\b(and|&)\b/gi, '(and|&)');   // Chấp nhận cả 'and' hoặc '&'
+
   let category = await Category.findOne({ 
     $or: [
       { slug: resolvedParams.slug },
-      { name: { $regex: new RegExp(`^${nameFromSlug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } }
+      { slug: rawSlug },
+      { name: { $regex: new RegExp(`^${flexiblePattern}$`, 'i') } }
     ]
   }).lean();
   
