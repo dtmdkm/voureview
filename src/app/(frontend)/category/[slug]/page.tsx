@@ -31,7 +31,15 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const resolvedParams = await params;
   await connectToDatabase();
   
-  const category = await Category.findOne({ slug: resolvedParams.slug }).lean();
+  let category = await Category.findOne({ slug: resolvedParams.slug }).lean();
+  
+  if (!category) {
+    // Thử tìm theo tên (thay dấu gạch ngang bằng dấu cách)
+    const nameFromSlug = resolvedParams.slug.replace(/-/g, ' ');
+    category = await Category.findOne({ 
+      name: { $regex: new RegExp(`^${nameFromSlug}$`, 'i') } 
+    }).lean();
+  }
   
   if (!category) {
     notFound();
