@@ -5,7 +5,7 @@ import DealsClient from './DealsClient';
 export const revalidate = 3600;
 
 export const metadata = {
-  title: 'All Deals & Coupons | Boboreviews',
+  title: 'All Deals & Coupons | Voureview',
   description: 'Browse the latest deals, coupons and promo codes from your favorite stores.',
 };
 

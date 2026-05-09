@@ -14,7 +14,7 @@ export default async function AdminSettings() {
     acc[s.key] = s.value;
     return acc;
   }, {
-    site_title: 'Boboreviews',
+    site_title: 'Voureview',
     site_logo: '',
     contact_email: '',
     footer_resources: [],

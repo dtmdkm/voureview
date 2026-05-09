@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'All Categories | Boboreviews',
+  title: 'All Categories | Voureview',
   description: 'Browse all categories to find the best coupons and deals for your favorite stores.',
 };
 

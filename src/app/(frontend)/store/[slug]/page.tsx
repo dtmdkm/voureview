@@ -96,7 +96,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const resolvedParams = await params;
   const store: any = await getCachedStore(resolvedParams.slug);
   if (!store) return { title: 'Store Not Found' };
-  const title = store.seoTitle || `${store.name} Coupons & Promo Codes | Boboreviews`;
+  const title = store.seoTitle || `${store.name} Coupons & Promo Codes | Voureview`;
   const description = store.seoDescription || store.description || `Get the latest ${store.name} coupons and deals verified today.`;
   return {
     title,

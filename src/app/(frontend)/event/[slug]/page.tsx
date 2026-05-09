@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   await connectToDatabase();
   const event = await EventSale.findOne({ slug }).lean() as any;
   if (!event) return { title: 'Event Not Found' };
-  const title = event.seoTitle || `${event.name} Coupons & Deals | Boboreviews`;
+  const title = event.seoTitle || `${event.name} Coupons & Deals | Voureview`;
   const description = event.seoDescription || `Find the best ${event.name} deals, promo codes and coupons from top stores.`;
   return {
     title,

@@ -7,8 +7,8 @@ import { Metadata } from 'next';
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ q?: string }> }): Promise<Metadata> {
   const { q } = await searchParams;
   return {
-    title: q ? `Kết quả tìm kiếm: "${q}" | Boboreviews` : 'Tìm kiếm | Boboreviews',
-    description: 'Tìm kiếm cửa hàng, deals và bài viết tại Boboreviews.',
+    title: q ? `Kết quả tìm kiếm: "${q}" | Voureview` : 'Tìm kiếm | Voureview',
+    description: 'Tìm kiếm cửa hàng, deals và bài viết tại Voureview.',
   };
 }
 

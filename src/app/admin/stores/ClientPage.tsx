@@ -19,15 +19,15 @@ const AVATAR_PALETTE = [
 ];
 
 const FAQ_TEMPLATES = (storeName: string) => [
-  { question: `Why should I visit Boboreviews for ${storeName} coupons?`, answer: `Boboreviews collects the top discounts from ${storeName}, even at the last minute while updating continually to ensure consumer savings.` },
-  { question: `Where to find ${storeName} promo codes?`, answer: `Right on the website of ${storeName} or join Boboreviews for more options of ${storeName} promo codes.` },
+  { question: `Why should I visit Voureview for ${storeName} coupons?`, answer: `Voureview collects the top discounts from ${storeName}, even at the last minute while updating continually to ensure consumer savings.` },
+  { question: `Where to find ${storeName} promo codes?`, answer: `Right on the website of ${storeName} or join Voureview for more options of ${storeName} promo codes.` },
   { question: `Will all ${storeName} discounts automatically be applied at checkout?`, answer: `No. It depends on each ${storeName} deal. Some require you to apply a code at discount field while some are applied automatically.` },
   { question: `Are there any ${storeName} Gift Cards available?`, answer: `If a ${storeName} Gift Card is available, it will be aggregated above. Let's check!` },
   { question: `Can you give me a guide for using ${storeName} coupon codes?`, answer: `Copy the coupon code, navigate to ${storeName}, add items to cart, apply code at checkout and enjoy saving.` },
-  { question: `Is there any ${storeName} coupons for new customers?`, answer: `New consumers can easily find many ${storeName} coupons on Boboreviews.` },
-  { question: `Can I submit ${storeName} coupons?`, answer: `Boboreviews allows all people to submit their own coupons. Click "Submit Coupon" at the top of the website.` },
+  { question: `Is there any ${storeName} coupons for new customers?`, answer: `New consumers can easily find many ${storeName} coupons on Voureview.` },
+  { question: `Can I submit ${storeName} coupons?`, answer: `Voureview allows all people to submit their own coupons. Click "Submit Coupon" at the top of the website.` },
   { question: `How many ${storeName} coupons is each customer allowed to use?`, answer: `You should check ${storeName} for detailed information because it is changed often.` },
-  { question: `When does ${storeName} release new promo codes?`, answer: `New ${storeName} promo codes are updated continuously on Boboreviews.` },
+  { question: `When does ${storeName} release new promo codes?`, answer: `New ${storeName} promo codes are updated continuously on Voureview.` },
   { question: `Can I use ${storeName} coupons for all products?`, answer: `Most ${storeName} coupons are only valid for certain products. Please check the "Details" section.` },
 ];
 
