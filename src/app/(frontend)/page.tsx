@@ -1,5 +1,6 @@
 import { connectToDatabase } from '@/lib/mongodb';
-import { Store, Deal, BlogPost, Setting } from '@/models';
+import { Store, Deal, BlogPost, Setting, Category } from '@/models';
+import { Search, CreditCard, Heart, BarChart3, BellRing, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CarouselWrapper from './CarouselWrapper';
@@ -32,7 +33,11 @@ export default async function HomePage() {
     BlogPost.find({ status: 'active' })
       .select('title slug image summary createdAt')
       .sort({ createdAt: -1 })
-      .limit(8)
+      .limit(3)
+      .lean(),
+    Category.find({})
+      .select('name slug')
+      .limit(20)
       .lean(),
     Setting.findOne({ key: 'home_banners' }).lean(),
   ]);
@@ -42,6 +47,7 @@ export default async function HomePage() {
   const stores = popularStores as any[];
   const activeDeals = (deals as any[]).filter((d) => d.storeId != null);
   const posts = blogPosts as any[];
+  const categories = popularCategories as any[];
 
   return (
     <>
@@ -138,6 +144,86 @@ export default async function HomePage() {
           );
         })}
       </CarouselWrapper>
+ 
+      {/* 7. Latest Blogs */}
+      <section className="latest-blogs-sec container">
+        <div className="sec-header">
+          <h2>Latest Blogs</h2>
+        </div>
+        <div className="blogs-grid">
+          {posts.map((post) => (
+            <div key={post._id} className="blog-card">
+              <Link href={`/blog/${post.slug}`} className="blog-image">
+                <Image 
+                  src={post.image || `https://placehold.co/600x300/f1f1f1/001d5e?text=${encodeURIComponent(post.title)}`}
+                  alt={post.title}
+                  width={600}
+                  height={300}
+                  className="object-cover"
+                  unoptimized={!post.image}
+                />
+              </Link>
+              <div className="blog-content">
+                <h3>{post.title}</h3>
+                <p>{post.summary || 'Valentine\'s Day is the most perfect time to express love and appreciation...'}</p>
+                <Link href={`/blog/${post.slug}`} className="read-more">
+                  Read More <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+ 
+      {/* 8. Popular Categories */}
+      <section className="popular-categories-sec container">
+        <div className="sec-header">
+          <h2>Popular Categories</h2>
+        </div>
+        <div className="categories-list">
+          {categories.map((cat) => (
+            <Link key={cat._id} href={`/category/${cat.slug}`} className="category-item">
+              {cat.name}
+            </Link>
+          ))}
+        </div>
+      </section>
+ 
+      {/* 9. Maximize Your Savings (Static) */}
+      <section className="savings-sec">
+        <div className="container">
+          <div className="sec-header text-center">
+            <h2>Maximize Your Savings</h2>
+          </div>
+          <div className="savings-grid">
+            <div className="savings-item">
+              <div className="savings-icon"><Search size={32} strokeWidth={1.5} /></div>
+              <h3>Comparison Shopping</h3>
+              <p>We show you new, used, local, rental, refurbished, and more shopping options to find you the lowest price.</p>
+            </div>
+            <div className="savings-item">
+              <div className="savings-icon"><CreditCard size={32} strokeWidth={1.5} /></div>
+              <h3>Cash Back</h3>
+              <p>Shop like usual and earn cash back at 4,500+ stores.</p>
+            </div>
+            <div className="savings-item">
+              <div className="savings-icon"><Heart size={32} strokeWidth={1.5} /></div>
+              <h3>Coupons</h3>
+              <p>Never look for coupons again. We do it for you within seconds.</p>
+            </div>
+            <div className="savings-item">
+              <div className="savings-icon"><BarChart3 size={32} strokeWidth={1.5} /></div>
+              <h3>Price History</h3>
+              <p>Prices fluctuate. See the cost over time to know if it's the right time to buy.</p>
+            </div>
+            <div className="savings-item">
+              <div className="savings-icon"><BellRing size={32} strokeWidth={1.5} /></div>
+              <h3>Price Drop Alerts</h3>
+              <p>Get notified when your saved item goes on sale; just set the price you would like to pay!</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
