@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Category | Boboreviews</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://admin.boboreviews.com">
+  <link rel="dns-prefetch" href="https://admin.boboreviews.com">
+  <style>
+    :root {
+      --card-bg: #ffffff;
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --text-main: #1e293b;
+    }
+    body {
+      background-color: #f8fafc;
+      color: var(--text-main);
+    }
+    .category-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .category-title-wrap {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .category-title-wrap h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .store-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .store-item {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid transparent;
+    }
+    .store-item:hover {
+      transform: translateX(8px);
+      border-color: var(--secondary);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    .store-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .store-logo-small {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: contain;
+      background: #f1f5f9;
+      padding: 4px;
+      border: 1px solid #e2e8f0;
+    }
+    .store-details h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .store-details p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin: 4px 0 0 0;
+    }
+    .view-btn {
+      background: #1a4d2e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .store-item:hover .view-btn {
+      background: #4f772d;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
+    }
+    .empty-state .icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    .empty-state h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #334155;
+    }
+    .empty-state p {
+      color: #64748b;
+      max-width: 400px;
+      margin: 0 auto 24px auto;
+    }
+    .skeleton-item {
+      height: 92px;
+      background: #eee;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <header style="background: white; border-bottom: 1px solid #e2e8f0; padding: 15px 0;">
+    <div class="container header-inner" style="justify-content: center;">
+      <a href="/" class="logo" style="color: #1e293b; font-size: 1.5rem;">BOBO<span>REVIEWS</span></a>
+    </div>
+  </header>
+
+  <div class="category-container">
+    <div class="category-title-wrap animate">
+      <h1 id="category-display-name">Loading...</h1>
+    </div>
+
+    <div id="stores-list-container" class="store-list">
+      <div class="skeleton-item"></div>
+      <div class="skeleton-item"></div>
+      <div class="skeleton-item"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    async function fetchCategoryData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let slug = urlParams.get('slug');
+      
+      if (!slug) {
+        const pathParts = window.location.pathname.split('/').filter(p => p);
+        if (pathParts.includes('category')) {
+          slug = pathParts[pathParts.indexOf('category') + 1];
+        } else {
+          slug = pathParts[pathParts.length - 1];
+        }
+      }
+
+      if (!slug) return window.location.href = '/';
+
+      const container = document.getElementById('stores-list-container');
+      const titleEl = document.getElementById('category-display-name');
+
+      try {
+        const res = await fetch('https://admin.boboreviews.com/api/data');
+        const data = await res.json();
+
+        const category = data.categories.find(c => c.slug === slug);
+        if (!category) {
+          titleEl.textContent = "Category Not Found";
+          container.innerHTML = '<div class="empty-state"><h2>Oops!</h2><p>We could not find this category.</p><a href="/" class="view-btn" style="width: auto; display: inline-block;">Back to Home</a></div>';
+          return;
+        }
+
+        titleEl.textContent = category.name;
+        document.title = `${category.name} - Boboreviews`;
+
+        const catId = category.id || category._id;
+        const matchedStores = (data.popularStores || []).filter(s => {
+          const sCatId = s.categoryId?.id || s.categoryId?._id || s.categoryId;
+          return sCatId === catId;
+        });
+
+        if (matchedStores.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state animate">
+              <div class="icon">📭</div>
+              <h2>No stores found yet!</h2>
+              <p>This category currently has no stores assigned. Please check back later or explore other categories.</p>
+              <a href="/" class="view-btn" style="width: auto; display: inline-block;">Explore More</a>
+            </div>
+          `;
+        } else {
+          container.innerHTML = '';
+          matchedStores.forEach(store => {
+            const item = document.createElement('a');
+            item.href = `/store/${store.slug}`;
+            item.className = 'store-item animate';
+            item.innerHTML = `
+              <div class="store-info">
+                <img src="${store.image || '/favicon.png'}" alt="${store.name}" class="store-logo-small" onerror="this.src='/favicon.png'">
+                <div class="store-details">
+                  <h3>${store.name}</h3>
+                  <p>${store.rating || 5}.0 ⭐ | ${store.description || 'Verified Store'}</p>
+                </div>
+              </div>
+              <div class="view-btn">View Deals</div>
+            `;
+            container.appendChild(item);
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        container.innerHTML = '<div class="empty-state"><h2>Connection Error</h2><p>Failed to load data. Please try again later.</p></div>';
+      }
+    }
+
+    fetchCategoryData();
+  </script>
+
+</body>
+</html>

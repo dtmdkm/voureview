@@ -1,0 +1,237 @@
+@import "tailwindcss";
+@source "../";
+@source "../../src";
+
+/* CSS Variables for shadcn/ui components */
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   FRONTEND PAGE STYLES (kept for public pages)
+   ===================================================== */
+
+:root {
+  --brand-primary: #1a4d2e;
+  --brand-secondary: #ff9f29;
+  --bg-dark: #0f172a;
+  --text-light: #f8fafc;
+  --text-muted-dark: #94a3b8;
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.frontend-page {
+  background: radial-gradient(circle at top right, #1e293b, #0f172a);
+  min-height: 100vh;
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.front-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.hero-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.store-card {
+  padding: 24px;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.store-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--brand-secondary);
+}
+
+.store-logo-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.deal-card-front:hover {
+  transform: translateY(-10px);
+  border-color: var(--brand-secondary);
+  transition: all 0.3s;
+}
+
+.deal-card-premium:hover {
+  transform: translateY(-5px);
+  border-color: var(--brand-secondary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.deal-item-row:hover {
+  border-color: var(--brand-secondary);
+  transform: scale(1.01);
+  transition: all 0.3s;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--brand-secondary);
+  transition: all 0.3s;
+}
+
+.breadcrumb-nav {
+  padding: 15px 0;
+  font-size: 12px;
+  color: var(--text-muted-dark);
+}
+
+.breadcrumb-nav a {
+  color: var(--text-muted-dark);
+  text-decoration: none;
+}
+
+.breadcrumb-nav a:hover {
+  color: white;
+}
+
+.prose {
+  color: var(--text-muted-dark);
+  line-height: 1.8;
+}
+
+.prose h2, .prose h3 {
+  color: white;
+  margin: 30px 0 16px;
+}
+
+.prose-content h2, .post-content h2 {
+  font-size: 1.8rem;
+  color: white;
+  margin: 30px 0 15px;
+}
+
+.prose-content p, .post-content p {
+  margin-bottom: 15px;
+}
+
+.prose-content ul, .post-content ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.post-content {
+  line-height: 1.8;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.post-content h2 {
+  font-size: 2rem;
+  color: white;
+  margin: 40px 0 20px;
+}
+
+.post-content h3 {
+  font-size: 1.5rem;
+  color: white;
+  margin: 30px 0 15px;
+}
+
+.post-content p { margin-bottom: 24px; }
+.post-content ul, .post-content ol { margin-left: 24px; margin-bottom: 24px; }
+.post-content img { max-width: 100%; border-radius: 20px; margin: 32px 0; }
+
+.code-button-wrapper:hover .code-hint {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0 10px;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Custom Scrollbar for Admin Sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: #94a3b8;
+}

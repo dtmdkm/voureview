@@ -1,0 +1,305 @@
+"use client";
+
+import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export default function StoreClient({ data, settings, eventSales, hideHero = false }: any) {
+  const [filter, setFilter] = useState('all');
+  const [selectedDeal, setSelectedDeal] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const deals = data.deals || [];
+  
+  useEffect(() => {
+    // Handle opening modal if ?offer=id is in URL
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const offerId = params.get('offer');
+      if (offerId && deals.length > 0) {
+        const deal = deals.find((d: any) => d._id === offerId || d.id === offerId);
+        if (deal) {
+          setSelectedDeal(deal);
+          setIsModalOpen(true);
+        } else {
+          // Fallback if deal data isn't in the current store (e.g. cross-store link)
+          const title = params.get('title');
+          const code = params.get('code');
+          const link = params.get('link');
+          if (title && link) {
+            setSelectedDeal({ title, code, link, type: code ? 'code' : 'deal' });
+            setIsModalOpen(true);
+          }
+        }
+      }
+    }
+  }, [deals]);
+
+  const filteredDeals = deals.filter((d: any) => {
+    if (filter === 'all') return true;
+    return d.type === filter;
+  });
+
+  const codesCount = deals.filter((d: any) => d.type === 'code').length;
+  const dealsCount = deals.filter((d: any) => d.type === 'deal').length;
+
+  const handleOpenDeal = (deal: any) => {
+    // Track click
+    fetch(`/api/deals/${deal._id}/click`, { method: 'POST' }).catch(() => {});
+    
+    if (typeof window !== 'undefined') {
+      const currentUrl = window.location.href.split('?')[0];
+      const couponParams = new URLSearchParams({
+        offer: deal._id || deal.id,
+        title: deal.title,
+        code: deal.code || '',
+        link: deal.link
+      });
+      
+      // Mở trang web cửa hàng hiện tại CÙNG VỚI popup trong tab MỚI (tab này sẽ được focus)
+      window.open(`${currentUrl}?${couponParams.toString()}`, '_blank');
+      
+      // Tab CŨ (hiện tại) sẽ tự động chuyển hướng đến link affiliate
+      window.location.href = deal.link;
+    }
+  };
+
+  const copyCode = (code: string) => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopied(true);
+    });
+  };
+
+  const footerData = {
+    resources: settings.footer_resources || [],
+    company: settings.footer_company || [],
+    notices: settings.footer_notices || []
+  };
+
+  return (
+    <>
+      {/* Store Hero */}
+      {!hideHero && (
+        <section id="store-hero" className="fade-in container" style={{ marginTop: '30px' }}>
+          <div className="store-banner-wrap">
+            <Image 
+              src={data.banner || 'https://placehold.co/1200x400/f8fafc/3258b3?text=Special+Offers'} 
+              alt={`${data.name} Banner`} 
+              fill 
+              priority
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          
+          <div className="store-profile-header">
+            <div className="store-logo-wrap">
+              <Image 
+                src={data.image || '/favicon.png'} 
+                alt={`${data.name} Logo`} 
+                width={140} 
+                height={140} 
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <div className="store-info-wrap">
+              <h1 className="store-title-main">
+                {data.name} Promo Codes & Coupons
+                <span className="verified-badge">Verified</span>
+              </h1>
+              <div className="store-meta-main">
+                <div className="stars">★★★★★</div>
+                <span className="vote-text">
+                  <strong>{data.rating?.toFixed(1) || '4.9'}</strong> / 5.0 from {data.totalVotes?.toLocaleString() || '840'} users
+                </span>
+              </div>
+            </div>
+            <div className="store-actions-main">
+               <button className="btn-follow" onClick={() => alert('Saved to your favorites!')}>
+                 <svg style={{ width:'18px', height:'18px', fill:'currentColor' }} viewBox="0 0 24 24">
+                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                 </svg>
+                 Follow
+               </button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <div className="store-layout fade-in container">
+        {/* Sidebar */}
+        <aside>
+          <div className="sidebar-card">
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '15px', color: '#111827', textAlign: 'left' }}>About {data.name}</h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, textAlign: 'left', marginBottom: '20px' }}>
+              {data.description || `Find the latest verified ${data.name} coupons and promo codes for May 2026.`}
+            </p>
+            <button className="btn-alert" onClick={() => deals.length > 0 && handleOpenDeal(deals[0])}>
+              Get Coupons Now
+            </button>
+            
+            <div className="stats-box">
+              <div className="stat-row">
+                <span>Total Offers</span>
+                <b>{deals.length}</b>
+              </div>
+              <div className="stat-row">
+                <span>Coupon Codes</span>
+                <b>{codesCount}</b>
+              </div>
+              <div className="stat-row">
+                <span>Best Discount</span>
+                <b style={{ color: 'var(--accent)' }}>{deals[0]?.discountValue || deals[0]?.discountPrice || deals[0]?.price || 'SALE'}</b>
+              </div>
+            </div>
+          </div>
+
+          <div className="sidebar-card" style={{ padding: '20px' }}>
+            <h4 style={{ fontSize: '0.95rem', marginBottom: '15px', textAlign: 'left' }}>Similar Stores</h4>
+            <div style={{ display: 'grid', gap: '12px' }}>
+              {settings.popular_stores?.slice(0, 5).map((s: any) => (
+                <Link key={s._id} href={`/store/${s.slug}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+                  <img src={s.image || '/favicon.png'} alt={s.name} style={{ width: '32px', height: '32px', objectFit: 'contain', border: '1px solid #eee', borderRadius: '4px' }} />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{s.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        {/* Main Content */}
+        <section>
+          <div className="promo-header">
+            <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>Current {data.name} Coupons</h2>
+          </div>
+
+          <div className="filter-tabs">
+            <button className={`tab ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
+              All ({deals.length})
+            </button>
+            <button className={`tab ${filter === 'code' ? 'active' : ''}`} onClick={() => setFilter('code')}>
+              Codes ({codesCount})
+            </button>
+            <button className={`tab ${filter === 'deal' ? 'active' : ''}`} onClick={() => setFilter('deal')}>
+              Deals ({dealsCount})
+            </button>
+          </div>
+
+          <div id="coupons-list">
+            {filteredDeals.map((deal: any) => (
+              <div key={deal._id} className="coupon-card">
+                <div className="save-badge">
+                  {deal.discountValue ? (
+                    <span className="amount">{deal.discountValue}</span>
+                  ) : (
+                    <>
+                      <span className="amount">{deal.discountPrice || deal.price || 'SALE'}</span>
+                      <span className="label">{deal.type === 'code' ? 'CODE' : 'DEAL'}</span>
+                    </>
+                  )}
+                </div>
+                <div className="coupon-info">
+                  <div className="verified-tag">Verified</div>
+                  <h3>{deal.title}</h3>
+                  <p>{deal.description}</p>
+                  <div className="social-proof-bar">
+                    <span className="social-proof-badge">✓ Working</span>
+                    <span className="social-proof-text">Used <strong>{Math.floor(Math.random() * 50) + 10}</strong> times today</span>
+                  </div>
+                </div>
+                <div className="coupon-action">
+                  {deal.type === 'code' || deal.code ? (
+                    <div className="get-code-wrapper" onClick={() => handleOpenDeal(deal)}>
+                      <div className="code-hint">{deal.code || 'SHOW'}</div>
+                      <div className="btn-peel">GET CODE</div>
+                    </div>
+                  ) : (
+                    <button className="btn-get" onClick={() => handleOpenDeal(deal)}>
+                      GET DEAL
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="about-section fade-in" style={{ marginTop: '40px' }}>
+            <h2>Review of {data.name}</h2>
+            <div 
+              className="content-body" 
+              dangerouslySetInnerHTML={{ __html: data.content || `Save more with verified coupons for ${data.name}.` }} 
+            />
+            
+            <div className="how-to-apply">
+              <h3>How to use a {data.name} promo code</h3>
+              <ol>
+                <li><strong>Copy a code:</strong> Browse this page and click "Get Code" on the offer you want. A popup will show the code and open the store.</li>
+                <li><strong>Shop the site:</strong> Add items to your shopping cart at {data.name}.</li>
+                <li><strong>Paste the code:</strong> During checkout, look for the box labeled "Promo Code" or "Discount Code" and paste your code there.</li>
+                <li><strong>Enjoy savings:</strong> Your discount will be applied to your total!</li>
+              </ol>
+            </div>
+
+            {data.faqs && data.faqs.length > 0 && (
+              <div className="faq-section" style={{ marginTop: '50px' }}>
+                <h2>{data.name} Frequently Asked Questions</h2>
+                <div style={{ display: 'grid', gap: '15px' }}>
+                  {data.faqs.map((faq: any, i: number) => (
+                    <details key={i} className="faq-details" open={i === 0}>
+                      <summary className="faq-summary">
+                        {faq.question}
+                      </summary>
+                      <div className="faq-answer">
+                        {faq.answer}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedDeal && (
+        <div className="modal-overlay" style={{ display: 'flex' }} onClick={() => setIsModalOpen(false)}>
+          <div className="modal-popup" onClick={e => e.stopPropagation()}>
+            <div className="modal-header-bar"></div>
+            <span className="modal-close" onClick={() => setIsModalOpen(false)}>&times;</span>
+            <div className="modal-body">
+              <Image 
+                src={data.image || '/favicon.png'} 
+                alt="Logo" 
+                className="modal-store-logo" 
+                width={80} 
+                height={80} 
+                style={{ objectFit: 'contain' }}
+              />
+              <h3 className="modal-title">{selectedDeal.title}</h3>
+              
+              {selectedDeal.code ? (
+                <>
+                  <p className="modal-instruction">Copy and paste this code at {data.name}</p>
+                  <div className="code-box">
+                    <div className="code-text">{selectedDeal.code}</div>
+                    <button className="copy-btn" onClick={() => copyCode(selectedDeal.code)} style={copied ? { background: '#00a38d' } : {}}>
+                      {copied ? 'COPIED!' : 'COPY'}
+                    </button>
+                  </div>
+                  <a href={selectedDeal.link} target="_blank" className="modal-footer-link">Go to {data.name} →</a>
+                </>
+              ) : (
+                <>
+                  <p className="modal-instruction" style={{ marginBottom: '25px' }}>No coupon code required. Discount will be applied automatically.</p>
+                  <a href={selectedDeal.link} target="_blank" className="btn-get" style={{ display: 'block', width: '100%', marginBottom: '15px' }}>SHOP NOW</a>
+                  <a href={selectedDeal.link} target="_blank" className="modal-footer-link">Go to {data.name} →</a>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

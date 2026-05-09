@@ -1,0 +1,52 @@
+{
+  "popularStores": [
+    { "id": "quotemywallte", "name": "Quotemywall", "link": "https://coreluxreview.com/store/quotemywallte", "image": "https://coreluxreview.com/uploads/files/Quotemywall.jpg" },
+    { "id": "jennibagte", "name": "Jennibag", "link": "https://coreluxreview.com/store/jennibagte", "image": "https://coreluxreview.com/uploads/files/Jennibag.jpg" },
+    { "id": "yeelight-hg", "name": "YEELIGHT", "link": "https://coreluxreview.com/store/yeelight-hg", "image": "https://coreluxreview.com/uploads/files/YEELIGHT.png" },
+    { "id": "glocusentte", "name": "Glocusent", "link": "https://coreluxreview.com/store/glocusentte", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20Glocusent.jpg" },
+    { "id": "puckipuppyte", "name": "Puckipuppy", "link": "https://coreluxreview.com/store/puckipuppyte", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2NH%20Puckipuppy.jpg" },
+    { "id": "frenchbeautyhub-nb", "name": "FrenchBeautyHub-nb", "link": "https://coreluxreview.com/store/frenchbeautyhub-nb", "image": "https://coreluxreview.com/uploads/files/Frenchbeautyhub.jpg" },
+    { "id": "x-arcade-nb", "name": "X-Arcade-nb", "link": "https://coreluxreview.com/store/x-arcade-nb", "image": "https://coreluxreview.com/uploads/files/X-Arcade.jpg" },
+    { "id": "buythermoprote", "name": "Buythermopro", "link": "https://coreluxreview.com/store/buythermoprote", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20Themopro.jpg" },
+    { "id": "glocusent-n", "name": "Glocusent-nb", "link": "https://coreluxreview.com/store/glocusent-n", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20Glocusent.jpg" },
+    { "id": "komorebi-hg", "name": "Komorebi", "link": "https://coreluxreview.com/store/komorebi-hg", "image": "https://coreluxreview.com/uploads/files/Komorebi.jpg" },
+    { "id": "femboyoutfitte", "name": "Femboyoutfit", "link": "https://coreluxreview.com/store/femboyoutfitte", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20Famboyoutfit.jpg" },
+    { "id": "swedishcandylandte", "name": "Swedishcandyland", "link": "https://coreluxreview.com/store/swedishcandylandte", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20swedish%20candy%20land.jpg" },
+    { "id": "exhobbyte", "name": "Exhobby", "link": "https://coreluxreview.com/store/exhobbyte", "image": "https://coreluxreview.com/uploads/files/Xhotboy.png" },
+    { "id": "snorelessnowte", "name": "Snorelessnow", "link": "https://coreluxreview.com/store/snorelessnowte", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20Snoreless%20now.jpg" },
+    { "id": "movespeedte", "name": "Movespeed", "link": "https://coreluxreview.com/store/movespeedte", "image": "https://coreluxreview.com/uploads/files/%E1%BA%A2nh%20Movespeed.jpg" }
+  ],
+  "deals": [
+    {
+      "id": "1",
+      "title": "Slim Fit Wallet Card Slots Flip Leather Phone Case For iPhone",
+      "price": "$39.99",
+      "discountPrice": "$37.89",
+      "link": "https://afcase.com/collections/apple-phone-case/products/luxury-slim-fit-premium-leather-cover-for-iphone-13-11-12-mini-pro-xr-xs-max-x-6-7-8-plus-wallet-card-slots-shockproof-flip-case?ref=xaqhmrqc",
+      "description": "Luxury slim fit premium leather cover for iPhone 13, 11, 12 Mini, Pro, XR, XS Max, X, 6, 7, 8 Plus.",
+      "image": "iphone_case.png"
+    },
+    {
+      "id": "2",
+      "title": "Collov AI Review: The Smart AI Tool for Virtual Staging",
+      "price": "Free Trial",
+      "discountPrice": "Premium",
+      "link": "collov-ai-review.html",
+      "description": "Discover how Collov AI helps real estate agents and designers create stunning virtual staging and interior designs in minutes.",
+      "image": "collov_ai.png"
+    }
+  ],
+  "categories": [
+    { "id": "ai", "name": "AI", "link": "https://coreluxreview.com/ai" },
+    { "id": "automotive", "name": "Automotive", "link": "https://coreluxreview.com/automotive" },
+    { "id": "books", "name": "Books", "link": "https://coreluxreview.com/books-posts" },
+    { "id": "cdb", "name": "CDB", "link": "https://coreluxreview.com/cdb-posts" },
+    { "id": "computers-software", "name": "Computers & Software", "link": "https://coreluxreview.com/computers-software-posts" },
+    { "id": "ecommerce", "name": "Ecommerce", "link": "https://coreluxreview.com/ecommerce" },
+    { "id": "electronics", "name": "Electronics", "link": "https://coreluxreview.com/articles-about-electronics-and-technology" },
+    { "id": "fashion", "name": "Fashion", "link": "https://coreluxreview.com/fashion-posts" },
+    { "id": "health", "name": "Health", "link": "https://coreluxreview.com/health-posts" },
+    { "id": "home-garden", "name": "Home Garden", "link": "https://coreluxreview.com/home-garden" },
+    { "id": "travel", "name": "Travel", "link": "https://coreluxreview.com/travel-posts" }
+  ]
+}
