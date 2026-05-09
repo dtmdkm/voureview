@@ -1106,14 +1106,74 @@ aside { position: sticky; top: 100px; }
 .coupon-items .coupon-items-btn { flex: 0 0 150px; text-align: right; }
 .coupon-items .coupon-items-btn span { padding: 8px 25px; border: 1px solid var(--navy); border-radius: 30px; color: var(--navy); font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
 .coupon-items a:hover .coupon-items-btn span { background: var(--navy); color: white; box-shadow: 0 5px 15px rgba(255, 87, 91, 0.2); }
-.see-more-stores-btn { text-align: center; margin-top: 20px; }
-.see-more-stores-btn a { display: inline-block; padding: 10px 30px; border: 1px solid #ccc; border-radius: 30px; color: #333; font-weight: 600; text-decoration: none; transition: 0.3s; }
-.see-more-stores-btn a:hover { background: #f1f1f1; }
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+.category-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  color: #475569;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+}
+.category-item:hover {
+  background: #3258b3;
+  color: white;
+  border-color: #3258b3;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(50, 88, 179, 0.2);
+}
+.category-item::before {
+  content: '#';
+  margin-right: 8px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+.category-item:hover::before {
+  opacity: 1;
+}
+
+/* Empty State Styling */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 2px dashed #e2e8f0;
+  margin: 40px 0;
+}
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+}
+.empty-state h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+.empty-state p {
+  color: #64748b;
+  margin-bottom: 25px;
+}
 
 .cash-back-sec .sec-title h2 { font-size: 2rem; font-weight: 800; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; display: flex; align-items: center; gap: 20px; color: var(--navy); }
 .cash-back-sec .sec-title h2::after { content: ''; flex: 1; height: 1px; background: #eee; }
 .slider-container { position: relative; display: flex; align-items: center; margin: 0 -10px; }
 .slider-nav { position: absolute; z-index: 10; background: white; border: 1px solid #ddd; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); top: 50%; transform: translateY(-50%); }
+.see-more-stores-btn { text-align: center; margin-top: 20px; }
+.see-more-stores-btn a { display: inline-block; padding: 10px 30px; border: 1px solid #ccc; border-radius: 30px; color: #333; font-weight: 600; text-decoration: none; transition: 0.3s; }
+.see-more-stores-btn a:hover { background: #f1f1f1; }
+
 .slider-nav.prev { left: -20px; }
 .slider-nav.next { right: -20px; }
 .slider-nav:hover { background: var(--navy); color: white; border-color: var(--navy); }

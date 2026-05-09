@@ -78,9 +78,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           );
         })}
         {stores.length === 0 && (
-          <div className="sidebar-card" style={{ gridColumn: '1 / -1', padding: '60px', textAlign: 'center' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>We couldn't find any {category.name} stores at the moment.</p>
-            <Link href="/category" style={{ color: 'var(--primary)', fontWeight: 700, marginTop: '15px', display: 'inline-block' }}>Explore other categories →</Link>
+          <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
+            <span className="empty-state-icon">🛍️</span>
+            <h3>No Stores Found</h3>
+            <p>We couldn't find any stores in the <strong>{category.name}</strong> category at the moment.</p>
+            <Link href="/category" className="btn-alert" style={{ display: 'inline-block', width: 'auto', padding: '12px 30px' }}>
+              Explore Other Categories
+            </Link>
           </div>
         )}
       </div>

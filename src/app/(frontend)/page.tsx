@@ -186,11 +186,13 @@ export default async function HomePage() {
           <h2>Popular Categories</h2>
         </div>
         <div className="categories-list">
-          {categories.map((cat) => (
-            <Link key={cat._id} href={`/category/${cat.slug}`} className="category-item">
-              {cat.name}
-            </Link>
-          ))}
+          {categories
+            .filter((cat) => cat.slug) // Tránh link undefined
+            .map((cat) => (
+              <Link key={cat._id} href={`/category/${cat.slug}`} className="category-item">
+                {cat.name}
+              </Link>
+            ))}
         </div>
       </section>
  
