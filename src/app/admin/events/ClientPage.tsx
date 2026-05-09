@@ -58,7 +58,7 @@ export default function EventsClientPage({ initialEvents }: { initialEvents: any
     setSaving(true);
     try {
       const id = ev.id || ev._id;
-      const res = await fetch(`/api/events/${id}`, { cache: 'no-store' });
+      const res = await fetch(`/api/events/${id}?t=${Date.now()}`, { cache: 'no-store' });
       const full = await res.json();
       setEditingEvent(full);
       const slug = full.slug || toSlug(full.name || '');

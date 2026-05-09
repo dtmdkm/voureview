@@ -96,7 +96,7 @@ export default function ClientPage({ initialStores, categories, events, dealStat
 
       try {
         const id = store.id || store._id;
-        const res = await fetch(`/api/stores/${id}`, { cache: 'no-store' });
+        const res = await fetch(`/api/stores/${id}?t=${Date.now()}`, { cache: 'no-store' });
         const full = await res.json();
         setEditingStore(full);
         setImage(full.image || '');

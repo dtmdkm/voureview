@@ -47,7 +47,7 @@ export default function CategoriesClientPage({ initialCategories, initialStores 
       setIsSaving(true);
       try {
         const id = category.id || category._id;
-        const res = await fetch(`/api/categories/${id}`, { cache: 'no-store' });
+        const res = await fetch(`/api/categories/${id}?t=${Date.now()}`, { cache: 'no-store' });
         const full = await res.json();
         setEditingCategory(full);
         setFormData({

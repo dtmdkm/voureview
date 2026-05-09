@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Store } from '@/models';
 import { revalidatePath } from 'next/cache';
+export const dynamic = 'force-dynamic';
 import { shouldRevalidate, smartRevalidateStore } from '@/lib/revalidateLogic';
 
 export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {

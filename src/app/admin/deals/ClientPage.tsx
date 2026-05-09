@@ -62,7 +62,7 @@ export default function ClientPage({ initialDeals, initialStores }: ClientPagePr
     setSaving(true); // Re-use saving state for loading detail
     try {
       const id = deal.id || deal._id;
-      const res = await fetch(`/api/deals/${id}`, { cache: 'no-store' });
+      const res = await fetch(`/api/deals/${id}?t=${Date.now()}`, { cache: 'no-store' });
       const fullDeal = await res.json();
       setEditingDeal(fullDeal);
       setFormData({ 
