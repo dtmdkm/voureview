@@ -197,7 +197,7 @@ export default async function HomePage() {
       {/* 9. Maximize Your Savings (Static) */}
       <section className="savings-sec">
         <div className="container">
-          <div className="sec-header text-center">
+          <div className="sec-header">
             <h2>Maximize Your Savings</h2>
           </div>
           <div className="savings-grid">
