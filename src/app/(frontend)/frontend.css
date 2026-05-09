@@ -1,7 +1,7 @@
 :root {
   --primary: #001d5e; 
   --primary-dark: #001340;
-  --accent: #FF575B; 
+  --accent: #3258b3; 
   --header-bg: #ffffff; 
   --footer-bg: #f8f9fa; /* Light Footer */
   --bg: #ffffff;
@@ -135,7 +135,7 @@ header.site-header {
   justify-content: center;
   font-size: 0.7rem;
   font-weight: 800;
-  color: #c0003a;
+  color: #3258b3;
   text-align: center;
   padding: 4px;
 }
@@ -341,7 +341,7 @@ header.site-header {
 .save-badge::before { top: -8px; }
 .save-badge::after { bottom: -8px; }
 
-.save-badge .amount { font-size: 1.25rem; font-weight: 900; color: #eb004a; text-align: center; white-space: nowrap; }
+.save-badge .amount { font-size: 1.25rem; font-weight: 900; color: #3258b3; text-align: center; white-space: nowrap; }
 .save-badge .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin-top: 4px; text-align: center; }
 
 .coupon-info { flex: 1; padding: 25px 35px; display: flex; flex-direction: column; justify-content: center; }
@@ -461,10 +461,10 @@ header.site-header {
 }
 .category-btn:hover { 
   background: #f0fdf4; 
-  color: #c0003a; 
-  border-color: #eb004a;
+  color: #3258b3; 
+  border-color: #3258b3;
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(235, 0, 74, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(50, 88, 179, 0.1);
 }
 
 /* Store Detail Specific Styles */
@@ -474,8 +474,8 @@ header.site-header {
 aside { position: sticky; top: 100px; }
 .sidebar-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f1f5f9; margin-bottom: 25px; }
 .stars { color: #facc15; font-size: 1.1rem; margin: 10px 0; }
-.btn-alert { width: 100%; padding: 14px; border: 2px solid #eb004a; color: #eb004a; background: white; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: 0.3s; font-size: 0.9rem; }
-.btn-alert:hover { background: #eb004a; color: white; box-shadow: 0 8px 15px rgba(235, 0, 74, 0.2); }
+.btn-alert { width: 100%; padding: 14px; border: 2px solid #3258b3; color: #3258b3; background: white; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: 0.3s; font-size: 0.9rem; }
+.btn-alert:hover { background: #3258b3; color: white; box-shadow: 0 8px 15px rgba(50, 88, 179, 0.2); }
 .stats-box { margin-top: 25px; border-top: 1px solid #f1f5f9; padding-top: 20px; text-align: left; }
 .stat-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.9rem; color: #475569; }
 
@@ -596,18 +596,18 @@ aside { position: sticky; top: 100px; }
   box-shadow: 0 4px 14px rgba(26, 77, 46, 0.2);
 }
 .btn-follow:hover {
-  background: #eb004a;
+  background: #3258b3;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(235, 0, 74, 0.3);
+  box-shadow: 0 6px 20px rgba(50, 88, 179, 0.3);
 }
 
 .promo-header h1 { font-size: 1.6rem; color: #1e293b; margin-bottom: 10px; }
 .filter-tabs { display: flex; gap: 8px; margin: 25px 0; border-bottom: 1px solid #f1f5f9; padding-bottom: 1px; }
 .tab { padding: 8px 16px; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 0.85rem; cursor: pointer; background: #f8fafc; color: #64748b; border: 1px solid #f1f5f9; border-bottom: none; transition: 0.2s; }
-.tab.active { background: #eb004a; color: white; border-color: #eb004a; }
+.tab.active { background: #3258b3; color: white; border-color: #3258b3; }
 
 .coupon-card { background: white; border-radius: 12px; border: 1px solid #e8edf2; margin-bottom: 16px; display: grid; grid-template-columns: 260px 1fr 200px; gap: 0; align-items: stretch; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: 0.25s; overflow: hidden; }
-.coupon-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); border-color: #eb004a; }
+.coupon-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); border-color: #3258b3; }
 
 /* Left panel: store logo + discount */
 .deal-left { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-right: 1px solid #f1f5f9; background: #fafafa; }
@@ -631,7 +631,7 @@ aside { position: sticky; top: 100px; }
 
 /* Middle: title + store name */
 .coupon-info { padding: 20px 28px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
-.verified-tag { color: #eb004a; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px; width: fit-content; }
+.verified-tag { color: #3258b3; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px; width: fit-content; }
 .verified-tag::before { content: '✓'; }
 .coupon-info h3 { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; margin: 0; }
 .deal-store-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); text-decoration: none; }
@@ -640,7 +640,7 @@ aside { position: sticky; top: 100px; }
 /* Right: action button */
 .coupon-action { padding: 20px; display: flex; align-items: center; justify-content: center; background: #fafafa; border-left: 1px solid #f1f5f9; }
 .btn-get { 
-  background: #eb004a; 
+  background: #3258b3; 
   color: white; 
   padding: 10px 24px; 
   border-radius: 6px; 
@@ -653,7 +653,7 @@ aside { position: sticky; top: 100px; }
   border: none;
   cursor: pointer;
 }
-.btn-get:hover { background: #c0003a; box-shadow: 0 4px 12px rgba(235, 0, 74, 0.3); }
+.btn-get:hover { background: #001d5e; box-shadow: 0 4px 12px rgba(50, 88, 179, 0.3); }
 
 /* Get Code Button with Peel Effect */
 .get-code-wrapper {
@@ -663,7 +663,7 @@ aside { position: sticky; top: 100px; }
   width: 100%;
   height: 45px;
   background: #ffffff;
-  border: 2px dashed #eb004a;
+  border: 2px dashed #3258b3;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -674,7 +674,7 @@ aside { position: sticky; top: 100px; }
   padding-right: 15px;
   font-family: monospace;
   font-weight: 700;
-  color: #c0003a;
+  color: #3258b3;
   font-size: 1.1rem;
   letter-spacing: 2px;
 }
@@ -684,7 +684,7 @@ aside { position: sticky; top: 100px; }
   left: -2px;
   width: 80%;
   height: calc(100% + 4px);
-  background: #eb004a;
+  background: #3258b3;
   color: white;
   display: flex;
   align-items: center;
@@ -705,7 +705,7 @@ aside { position: sticky; top: 100px; }
   height: 0;
   border-style: solid;
   border-width: 0 20px 20px 0;
-  border-color: transparent #c0003a transparent transparent;
+  border-color: transparent #001d5e transparent transparent;
   transition: 0.4s;
 }
 .get-code-wrapper:hover .btn-peel {
@@ -716,7 +716,7 @@ aside { position: sticky; top: 100px; }
 }
 
 .about-section { margin-top: 50px; padding: 40px; background: white; border-radius: 16px; border: 1px solid #f1f5f9; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
-.about-section h2 { font-size: 1.6rem; margin-bottom: 25px; border-bottom: 3px solid #eb004a; display: inline-block; padding-bottom: 5px; color: #1e293b; }
+.about-section h2 { font-size: 1.6rem; margin-bottom: 25px; border-bottom: 3px solid #3258b3; display: inline-block; padding-bottom: 5px; color: #1e293b; }
 .content-body { color: #475569; font-size: 1rem; line-height: 1.8; }
 .content-body p { margin-bottom: 1.25rem; }
 .content-body h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; color: #1e293b; }
@@ -736,7 +736,7 @@ aside { position: sticky; top: 100px; }
 }
 
 .how-to-apply { margin-top: 40px; padding: 35px; background: #f0fdf4; border-radius: 16px; border: 1px solid #dcfce7; position: relative; overflow: hidden; }
-.how-to-apply::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #eb004a; }
+.how-to-apply::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #3258b3; }
 .how-to-apply h3 { font-size: 1.4rem; margin-bottom: 20px; color: #166534; display: flex; align-items: center; gap: 10px; }
 .how-to-apply h3::before { content: '💡'; font-size: 1.2rem; }
 .how-to-apply ol { list-style: none; counter-reset: steps; }
@@ -749,7 +749,7 @@ aside { position: sticky; top: 100px; }
   top: 2px; 
   width: 22px; 
   height: 22px; 
-  background: #eb004a; 
+  background: #3258b3; 
   color: white; 
   border-radius: 50%; 
   display: flex; 
@@ -763,18 +763,18 @@ aside { position: sticky; top: 100px; }
 /* Modal Popup Styles */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .modal-popup { background: white; width: 500px; max-width: 90%; border-radius: 16px; overflow: hidden; position: relative; animation: slideUp 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-.modal-header-bar { height: 6px; background: #eb004a; width: 100%; }
+.modal-header-bar { height: 6px; background: #3258b3; width: 100%; }
 .modal-close { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #94a3b8; cursor: pointer; transition: 0.2s; }
 .modal-close:hover { color: #1e293b; }
 .modal-body { padding: 40px 30px; text-align: center; }
 .modal-store-logo { width: 80px; height: 80px; object-fit: contain; border: 1px solid #f1f5f9; padding: 10px; border-radius: 12px; margin-bottom: 15px; }
 .modal-title { font-size: 1.4rem; color: #1e293b; margin-bottom: 25px; }
 .modal-instruction { font-size: 0.9rem; color: #64748b; margin-bottom: 15px; }
-.code-box { display: flex; border: 2px dashed #eb004a; border-radius: 8px; overflow: hidden; margin-bottom: 20px; background: #f0fdf4; }
+.code-box { display: flex; border: 2px dashed #3258b3; border-radius: 8px; overflow: hidden; margin-bottom: 20px; background: #f0fdf4; }
 .code-text { flex: 1; padding: 15px; font-size: 1.2rem; font-weight: 800; color: #166534; letter-spacing: 1px; }
-.copy-btn { background: #eb004a; color: white; border: none; padding: 0 25px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
-.copy-btn:hover { background: #c0003a; }
-.modal-footer-link { display: block; margin-top: 20px; color: #eb004a; font-weight: 600; text-decoration: none; }
+.copy-btn { background: #3258b3; color: white; border: none; padding: 0 25px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+.copy-btn:hover { background: #001d5e; }
+.modal-footer-link { display: block; margin-top: 20px; color: #3258b3; font-weight: 600; text-decoration: none; }
 
 @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -790,8 +790,8 @@ aside { position: sticky; top: 100px; }
   transition: all 0.3s ease;
 }
 .faq-details[open] {
-  border-color: #eb004a;
-  box-shadow: 0 4px 15px rgba(235, 0, 74, 0.1);
+  border-color: #3258b3;
+  box-shadow: 0 4px 15px rgba(50, 88, 179, 0.1);
 }
 .faq-summary {
   padding: 18px 20px;
@@ -810,7 +810,7 @@ aside { position: sticky; top: 100px; }
 .faq-summary::after {
   content: '+';
   font-size: 1.5rem;
-  color: #eb004a;
+  color: #3258b3;
   transition: transform 0.3s ease;
 }
 .faq-details[open] .faq-summary::after {
@@ -936,7 +936,7 @@ aside { position: sticky; top: 100px; }
   align-items: center;
   border-right: 1px dashed #f1f5f9;
   padding: 20px;
-  color: #eb004a;
+  color: #3258b3;
 }
 .deal-thumb .amount { font-size: 1.6rem; font-weight: 800; line-height: 1.2; text-align: center; }
 .deal-thumb .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
@@ -946,7 +946,7 @@ aside { position: sticky; top: 100px; }
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(235, 0, 74, 0.88);
+  background: rgba(50, 88, 179, 0.88);
   color: white;
   text-align: center;
   padding: 5px 8px;
@@ -979,8 +979,8 @@ aside { position: sticky; top: 100px; }
   cursor: pointer;
   transition: all 0.2s;
 }
-.deals-filter-btn:hover { border-color: #eb004a; color: #c0003a; background: #f0fdf4; }
-.deals-filter-btn.active { background: #eb004a; border-color: #eb004a; color: white; }
+.deals-filter-btn:hover { border-color: #3258b3; color: #3258b3; background: #f0fdf4; }
+.deals-filter-btn.active { background: #3258b3; border-color: #3258b3; color: white; }
 .deals-filter-count {
   background: rgba(0,0,0,0.08);
   color: inherit;
