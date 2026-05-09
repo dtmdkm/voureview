@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Setting } from '@/models';
+export const dynamic = 'force-dynamic';
 
 const LEGAL_KEYS = ['page_about', 'page_contact', 'page_privacy', 'page_terms', 'page_affiliate', 'page_cookie'];
 

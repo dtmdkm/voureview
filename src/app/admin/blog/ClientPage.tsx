@@ -45,7 +45,7 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
     setSaving(true);
     try {
       const id = post.id || post._id;
-      const res = await fetch(`/api/blog/${id}`, { cache: 'no-store' });
+      const res = await fetch(`/api/blog/${id}?t=${Date.now()}`, { cache: 'no-store' });
       const full = await res.json();
       setEditingPost(full); 
       setFormData({ 
