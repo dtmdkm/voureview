@@ -131,8 +131,8 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
         <aside>
           <div className="sidebar-card">
             <h3 style={{ fontSize: '1.1rem', marginBottom: '15px', color: '#111827', textAlign: 'left' }}>About {data.name}</h3>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, textAlign: 'left', marginBottom: '20px' }}>
-              {data.description || `Find the latest verified ${data.name} coupons and promo codes for May 2026.`}
+            <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, textAlign: 'left', marginBottom: '20px', fontWeight: 500 }}>
+              {data.description || `Explore the best verified ${data.name} coupons and deals today.`}
             </p>
             <button className="btn-alert" onClick={() => deals.length > 0 && handleOpenDeal(deals[0])}>
               Get Coupons Now
@@ -154,16 +154,24 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
             </div>
           </div>
 
-          <div className="sidebar-card" style={{ padding: '20px' }}>
-            <h4 style={{ fontSize: '0.95rem', marginBottom: '15px', textAlign: 'left' }}>Similar Stores</h4>
-            <div style={{ display: 'grid', gap: '12px' }}>
-              {settings.popular_stores?.slice(0, 5).map((s: any) => (
-                <Link key={s._id} href={`/store/${s.slug}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-                  <img src={s.image || '/favicon.png'} alt={s.name} style={{ width: '32px', height: '32px', objectFit: 'contain', border: '1px solid #eee', borderRadius: '4px' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{s.name}</span>
-                </Link>
-              ))}
+          <div className="sidebar-card" style={{ padding: '24px', textAlign: 'center' }}>
+            <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '15px', color: '#111827' }}>Rating & Votes</h4>
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ fontSize: '24px', color: '#f59e0b', letterSpacing: '4px', marginBottom: '8px' }}>★★★★★</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1e293b' }}>
+                {data.rating?.toFixed(1) || '5.0'} <span style={{ color: '#94a3b8', fontWeight: 400, fontSize: '0.9rem' }}>/ 5.0</span>
+              </div>
+              <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '4px' }}>
+                {data.totalVotes?.toLocaleString() || '48'} votes
+              </div>
             </div>
+            <button 
+              className="btn-see-more" 
+              style={{ width: '100%', padding: '10px', fontSize: '0.9rem' }}
+              onClick={() => alert('Thank you for your rating!')}
+            >
+              Rate it
+            </button>
           </div>
         </aside>
 
