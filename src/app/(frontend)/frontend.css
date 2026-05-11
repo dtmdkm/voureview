@@ -341,8 +341,8 @@ header.site-header {
 .save-badge::before { top: -8px; }
 .save-badge::after { bottom: -8px; }
 
-.save-badge .amount { font-size: 2.2rem; font-weight: 900; color: #eb004a; text-align: center; white-space: normal; line-height: 1.1; word-break: break-word; max-width: 130px; }
-.save-badge .label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #eb004a; margin-top: 2px; text-align: center; opacity: 0.8; }
+.save-badge .amount { font-size: 1.8rem; font-weight: 900; color: #ff5252; text-align: center; white-space: normal; line-height: 1.15; overflow-wrap: break-word; word-break: normal; padding: 0 10px; width: 100%; }
+.save-badge .label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #ff5252; margin-top: 2px; text-align: center; opacity: 0.8; }
 
 .coupon-info { flex: 1; padding: 15px 35px; display: flex; flex-direction: column; justify-content: center; }
 .verified-tag { 
