@@ -268,6 +268,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
             <h2>Review of {data.name}</h2>
             <div 
               className="content-body" 
+              style={{ whiteSpace: 'pre-wrap' }}
               dangerouslySetInnerHTML={{ __html: data.content || `Save more with verified coupons for ${data.name}.` }} 
             />
             
