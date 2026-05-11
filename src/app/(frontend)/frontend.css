@@ -315,15 +315,15 @@ header.site-header {
 .coupon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-color: var(--primary); }
 
 .save-badge { 
-  width: 150px; 
-  min-width: 150px;
+  width: 180px; 
+  min-width: 180px;
   background: #ffffff; 
   display: flex; 
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
   border-right: 2px dashed #e2e8f0; 
-  padding: 10px 20px; 
+  padding: 10px 10px; 
   color: var(--primary); 
   position: relative;
 }
@@ -341,7 +341,7 @@ header.site-header {
 .save-badge::before { top: -8px; }
 .save-badge::after { bottom: -8px; }
 
-.save-badge .amount { font-size: 1.8rem; font-weight: 900; color: #ff5252; text-align: center; white-space: normal; line-height: 1.15; overflow-wrap: break-word; word-break: normal; padding: 0 10px; width: 100%; }
+.save-badge .amount { font-size: 1.8rem; font-weight: 900; color: #ff5252; text-align: center; white-space: normal; line-height: 1.15; overflow-wrap: break-word; word-break: normal; padding: 0; width: 100%; }
 .save-badge .label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #ff5252; margin-top: 2px; text-align: center; opacity: 0.8; }
 
 .coupon-info { flex: 1; padding: 15px 35px; display: flex; flex-direction: column; justify-content: center; }
