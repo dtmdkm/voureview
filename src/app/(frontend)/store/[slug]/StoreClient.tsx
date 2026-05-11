@@ -211,7 +211,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
         {/* Main Content */}
         <section>
           <div className="promo-header">
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>Current {data.name} Coupons</h2>
+            <h2 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>{data.name} Coupons and Promo Codes</h2>
           </div>
 
           <div className="filter-tabs">
