@@ -24,7 +24,7 @@ const getCachedStore = cache(async (slug: string) => {
 // Heavy Loader: Fetches Deals, Settings, and EventSales in parallel
 async function ContentLoader({ storeId, storeData }: any) {
   const [deals, settingsList, eventSales] = await Promise.all([
-    Deal.find({ storeId, isApproved: true }).select('title slug storeId type clicks discountValue discountPrice price code link isVerified isFeatured expireAt createdAt').sort({ sortOrder: 1, createdAt: -1 }).lean(),
+    Deal.find({ storeId, isApproved: true }).select('title description slug storeId type clicks discountValue discountPrice price code link isVerified isFeatured expireAt createdAt').sort({ sortOrder: 1, createdAt: -1 }).lean(),
     Setting.find({}).lean(),
     EventSale.find({ status: 'active' }).lean()
   ]);

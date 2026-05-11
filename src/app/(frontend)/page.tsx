@@ -18,7 +18,7 @@ const defaultBanners = [
 export default async function HomePage() {
   await connectToDatabase();
 
-  const [popularStores, deals, blogPosts, popularCategories, bannerSetting] = await Promise.all([
+  const [popularStores, deals, allDealsRaw, blogPosts, popularCategories, bannerSetting] = await Promise.all([
     Store.find({ status: 'active' })
       .sort({ isFeatured: -1, createdAt: -1 })
       .limit(24)
@@ -27,9 +27,11 @@ export default async function HomePage() {
     Deal.find({})
       .sort({ isFeatured: -1, clicks: -1 })
       .limit(10)
-      .select('title slug storeId type discountValue discountPrice')
+      .select('title description slug storeId type discountValue discountPrice')
       .populate('storeId', 'name slug image')
       .lean(),
+    // Fetch all active deals to calculate counts and find best discounts per store
+    Deal.find({ isApproved: true }).select('storeId discountValue discountPrice price').sort({ isFeatured: -1, createdAt: -1 }).lean(),
     BlogPost.find({ status: 'active' })
       .select('title slug image summary createdAt')
       .sort({ createdAt: -1 })
@@ -42,9 +44,28 @@ export default async function HomePage() {
     Setting.findOne({ key: 'home_banners' }).lean(),
   ]);
 
+  // Calculate deal counts and best discounts per store
+  const dealCounts: Record<string, number> = {};
+  const storeBestDiscounts: Record<string, string> = {};
+
+  (allDealsRaw as any[]).forEach(d => {
+    const sId = d.storeId?.toString();
+    if (sId) {
+      dealCounts[sId] = (dealCounts[sId] || 0) + 1;
+      if (!storeBestDiscounts[sId]) {
+         const discount = d.discountValue || d.discountPrice || d.price;
+         if (discount) storeBestDiscounts[sId] = discount;
+      }
+    }
+  });
+
   const banners = ((bannerSetting as any)?.value || defaultBanners).filter((b: any) => b.isActive !== false);
 
-  const stores = popularStores as any[];
+  const stores = (popularStores as any[]).map(s => ({
+    ...s,
+    dealCount: dealCounts[s._id.toString()] || 0,
+    bestDiscount: storeBestDiscounts[s._id.toString()] || null
+  }));
   const activeDeals = (deals as any[]).filter((d) => d.storeId != null);
   const posts = blogPosts as any[];
   const categories = popularCategories as any[];
@@ -91,7 +112,7 @@ export default async function HomePage() {
                   />
                   <div className="cash-back-info">
                     <h3>{store.name}</h3>
-                    <span>+Up to {(idx * 2 % 5) + 2}% Cash Back</span>
+                    <span>{store.bestDiscount || 'Verified Deal'}</span>
                   </div>
                 </Link>
               </div>
@@ -123,10 +144,11 @@ export default async function HomePage() {
         })}
       </CarouselWrapper>
 
-      {/* 6. Offers Of The Week */}
       <CarouselWrapper title="Offers Of The Week" className="cash-back-sec top-deals-sec container">
-        {activeDeals.slice(0, 6).map((deal, idx) => {
+        {activeDeals.slice(0, 6).map((deal) => {
           const storeName = deal.storeId?.name || 'Store';
+          const sId = deal.storeId?._id?.toString();
+          const count = sId ? (dealCounts[sId] || 0) : 0;
           return (
             <div key={deal._id} className="swiper-slide offer-slide">
               <div className="cash-back-card">
@@ -139,9 +161,16 @@ export default async function HomePage() {
                     style={{ objectFit: 'contain' }}
                     unoptimized={!deal.storeId?.image}
                   />
-                  <div className="cash-back-info text-center">
-                    <h3>{(idx * 4 % 10) + 2} Coupons</h3>
-                    <span>{deal.discountValue || deal.discountPrice || '50% OFF'}</span>
+                  <div className="cash-back-info text-center" style={{ padding: '15px' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>{count} {count > 1 ? 'Coupons' : 'Coupon'}</h3>
+                    <div style={{ fontSize: '0.85rem', color: '#eb004a', fontWeight: 900, marginBottom: '8px' }}>
+                      {deal.discountValue || deal.discountPrice || '50% OFF'}
+                    </div>
+                    {deal.description && (
+                      <p style={{ fontSize: '0.75rem', color: '#64748b', lineHeight: 1.4, margin: '0', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {deal.description}
+                      </p>
+                    )}
                   </div>
                 </Link>
               </div>

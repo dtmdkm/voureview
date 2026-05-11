@@ -38,11 +38,13 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
 
   const filteredDeals = deals.filter((d: any) => {
     if (filter === 'all') return true;
-    return d.type === filter;
+    if (filter === 'code') return d.type === 'code' || d.code;
+    if (filter === 'deal') return d.type === 'deal' && !d.code;
+    return true;
   });
 
-  const codesCount = deals.filter((d: any) => d.type === 'code').length;
-  const dealsCount = deals.filter((d: any) => d.type === 'deal').length;
+  const codesCount = deals.filter((d: any) => d.type === 'code' || d.code).length;
+  const dealsCount = deals.filter((d: any) => d.type === 'deal' && !d.code).length;
 
   const handleOpenDeal = (deal: any) => {
     // Track click
@@ -77,6 +79,30 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
     notices: settings.footer_notices || []
   };
 
+  const displayRating = data.rating || 4.9;
+  const pseudoRandomVotes = data._id ? parseInt(data._id.substring(data._id.length - 4), 16) % 5000 + 50 : 1250;
+  const displayVotes = data.totalVotes || pseudoRandomVotes;
+
+  const renderStars = () => {
+    const percentage = (displayRating / 5) * 100;
+    return (
+      <div style={{ position: 'relative', display: 'inline-block' }}>
+        <div style={{ color: '#e2e8f0' }}>★★★★★</div>
+        <div style={{ 
+          color: '#f59e0b', 
+          position: 'absolute', 
+          top: 0, 
+          left: 0, 
+          whiteSpace: 'nowrap', 
+          overflow: 'hidden', 
+          width: `${percentage}%` 
+        }}>
+          ★★★★★
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       {/* Store Hero */}
@@ -108,9 +134,9 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
                 <span className="verified-badge">Verified</span>
               </h1>
               <div className="store-meta-main">
-                <div className="stars">★★★★★</div>
+                <div className="stars">{renderStars()}</div>
                 <span className="vote-text">
-                  <strong>{data.rating?.toFixed(1) || '4.9'}</strong> / 5.0 from {data.totalVotes?.toLocaleString() || '840'} users
+                  <strong>{displayRating.toFixed(1)}</strong> / 5.0 from {displayVotes.toLocaleString()} users
                 </span>
               </div>
             </div>
@@ -157,12 +183,12 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
           <div className="sidebar-card" style={{ padding: '24px', textAlign: 'center' }}>
             <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '15px', color: '#111827' }}>Rating & Votes</h4>
             <div style={{ marginBottom: '15px' }}>
-              <div style={{ fontSize: '24px', color: '#f59e0b', letterSpacing: '4px', marginBottom: '8px' }}>★★★★★</div>
+              <div style={{ fontSize: '24px', letterSpacing: '4px', marginBottom: '8px' }}>{renderStars()}</div>
               <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1e293b' }}>
-                {data.rating?.toFixed(1) || '5.0'} <span style={{ color: '#94a3b8', fontWeight: 400, fontSize: '0.9rem' }}>/ 5.0</span>
+                {displayRating.toFixed(1)} <span style={{ color: '#94a3b8', fontWeight: 400, fontSize: '0.9rem' }}>/ 5.0</span>
               </div>
               <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '4px' }}>
-                {data.totalVotes?.toLocaleString() || '48'} votes
+                {displayVotes.toLocaleString()} votes
               </div>
             </div>
             <button 

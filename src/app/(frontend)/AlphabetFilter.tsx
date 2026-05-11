@@ -66,10 +66,10 @@ export default function AlphabetFilter({ stores }: Props) {
                     <h3>{store.name}</h3>
                   </div>
                   <div className="coupon">
-                    <div className="coupon-count">{(idx * 3 % 15) + 5} Coupons</div>
+                    <div className="coupon-count">{(store as any).dealCount || 0} {((store as any).dealCount || 0) > 1 ? 'Coupons' : 'Coupon'}</div>
                   </div>
                   <div className="cash-back">
-                    <span>{(idx * 7 % 20) + 10}% Off</span>
+                    <span>{(store as any).bestDiscount || 'Verified Deal'}</span>
                   </div>
                   <div className="coupon-items-btn">
                     <span>Shop &amp; Save</span>

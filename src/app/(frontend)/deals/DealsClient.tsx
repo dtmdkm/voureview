@@ -10,13 +10,13 @@ export default function DealsClient({ deals }: { deals: any[] }) {
   const [copied, setCopied] = useState<string | null>(null);
 
   const filtered = deals.filter((d) => {
-    if (filter === 'code') return d.type === 'code';
-    if (filter === 'deal') return d.type !== 'code';
+    if (filter === 'code') return d.type === 'code' || d.code;
+    if (filter === 'deal') return d.type === 'deal' && !d.code;
     return true;
   });
 
-  const codeCount = deals.filter((d) => d.type === 'code').length;
-  const dealCount = deals.filter((d) => d.type !== 'code').length;
+  const codeCount = deals.filter((d) => d.type === 'code' || d.code).length;
+  const dealCount = deals.filter((d) => d.type === 'deal' && !d.code).length;
 
   const handleCopy = (code: string, id: string) => {
     navigator.clipboard.writeText(code).then(() => {
