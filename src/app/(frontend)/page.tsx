@@ -110,9 +110,9 @@ export default async function HomePage() {
                     style={{ objectFit: 'contain', background: '#f5f5f5' }}
                     unoptimized={!store.image}
                   />
-                  <div className="cash-back-info">
-                    <h3>{store.name}</h3>
-                    <span>{store.bestDiscount || 'Verified Deal'}</span>
+                  <div className="cash-back-info text-center" style={{ padding: '15px' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>{store.name}</h3>
+                    <span style={{ fontSize: '0.85rem', color: '#ff5252', fontWeight: 900 }}>{store.bestDiscount || 'Verified Deal'}</span>
                   </div>
                 </Link>
               </div>
@@ -166,7 +166,7 @@ export default async function HomePage() {
                   />
                   <div className="cash-back-info text-center" style={{ padding: '15px' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>{count} {count > 1 ? 'Coupons' : 'Coupon'}</h3>
-                    <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 900, marginBottom: '8px' }}>
+                    <div style={{ fontSize: '0.85rem', color: '#ff5252', fontWeight: 900, marginBottom: '8px' }}>
                       {displayDiscount}
                     </div>
                     {deal.description && (

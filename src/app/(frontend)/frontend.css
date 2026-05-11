@@ -1102,7 +1102,7 @@ aside { position: sticky; top: 100px; }
 .coupon-items .image h3 { font-size: 1rem; margin: 0; color: #000; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .coupon-items .coupon { flex: 1; text-align: center; }
 .coupon-items .coupon-count { font-size: 0.9rem; color: #666; font-weight: 500; }
-.coupon-items .cash-back { flex: 0 0 150px; text-align: center; color: var(--accent); font-weight: 700; }
+.coupon-items .cash-back { flex: 0 0 150px; text-align: center; color: #ff5252; font-weight: 700; }
 .coupon-items .coupon-items-btn { flex: 0 0 150px; text-align: right; }
 .coupon-items .coupon-items-btn span { padding: 8px 25px; border: 1px solid var(--navy); border-radius: 30px; color: var(--navy); font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
 .coupon-items a:hover .coupon-items-btn span { background: var(--navy); color: white; box-shadow: 0 5px 15px rgba(255, 87, 91, 0.2); }
