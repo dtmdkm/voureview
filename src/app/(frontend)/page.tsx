@@ -149,6 +149,9 @@ export default async function HomePage() {
           const storeName = deal.storeId?.name || 'Store';
           const sId = deal.storeId?._id?.toString();
           const count = sId ? (dealCounts[sId] || 0) : 0;
+          const bestDiscount = sId ? storeBestDiscounts[sId] : null;
+          const displayDiscount = bestDiscount ? `Up to ${bestDiscount}` : (deal.discountValue || deal.discountPrice || '50% OFF');
+          
           return (
             <div key={deal._id} className="swiper-slide offer-slide">
               <div className="cash-back-card">
@@ -163,8 +166,8 @@ export default async function HomePage() {
                   />
                   <div className="cash-back-info text-center" style={{ padding: '15px' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>{count} {count > 1 ? 'Coupons' : 'Coupon'}</h3>
-                    <div style={{ fontSize: '0.85rem', color: '#eb004a', fontWeight: 900, marginBottom: '8px' }}>
-                      {deal.discountValue || deal.discountPrice || '50% OFF'}
+                    <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 900, marginBottom: '8px' }}>
+                      {displayDiscount}
                     </div>
                     {deal.description && (
                       <p style={{ fontSize: '0.75rem', color: '#64748b', lineHeight: 1.4, margin: '0', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>

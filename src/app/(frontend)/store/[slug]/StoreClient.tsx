@@ -80,7 +80,14 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
   };
 
   const displayRating = data.rating || 4.9;
-  const pseudoRandomVotes = data._id ? parseInt(data._id.substring(data._id.length - 4), 16) % 5000 + 50 : 1250;
+  const generateRandomVotes = (name: string) => {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash) % 5000 + 150;
+  };
+  const pseudoRandomVotes = data.name ? generateRandomVotes(data.name) : 1250;
   const displayVotes = data.totalVotes || pseudoRandomVotes;
 
   const renderStars = () => {
