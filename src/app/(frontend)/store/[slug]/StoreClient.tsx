@@ -88,7 +88,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
     return Math.abs(hash) % 5000 + 150;
   };
   const pseudoRandomVotes = data.name ? generateRandomVotes(data.name) : 1250;
-  const displayVotes = data.totalVotes || pseudoRandomVotes;
+  const displayVotes = data.totalVotes === 1250 ? pseudoRandomVotes : (data.totalVotes || pseudoRandomVotes);
 
   const renderStars = () => {
     const percentage = (displayRating / 5) * 100;
