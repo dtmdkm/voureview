@@ -126,8 +126,8 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
           </div>
           
           <div className="store-profile-header">
-            <div className="store-logo-wrap">
-              <a href={data.link || '#'} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 20 }}>
+            <a href={data.link || '#'} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', textDecoration: 'none', position: 'relative', zIndex: 999, pointerEvents: 'auto' }}>
+              <div className="store-logo-wrap" style={{ cursor: 'pointer', pointerEvents: 'auto', position: 'relative', zIndex: 999 }}>
                 <Image 
                   src={data.image || '/favicon.png'} 
                   alt={`${data.name} Logo`} 
@@ -135,8 +135,8 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
                   height={140} 
                   style={{ objectFit: 'contain' }}
                 />
-              </a>
-            </div>
+              </div>
+            </a>
             <div className="store-info-wrap">
               <h1 className="store-title-main">
                 {data.name} Promo Codes & Coupons
@@ -217,12 +217,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
                 <span>Database updated daily — last verified <strong suppressHydrationWarning>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong></span>
               </li>
             </ul>
-            
-            <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #e2e8f0' }}>
-              <a href="/legal" style={{ color: '#0052ff', fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none' }}>
-                Learn how we verify coupons →
-              </a>
-            </div>
+
           </div>
 
           <div className="sidebar-card" style={{ padding: '24px', textAlign: 'center' }}>
@@ -283,7 +278,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
                   <p>{deal.description}</p>
                   <div className="social-proof-bar">
                     <span className="social-proof-badge">✓ Working</span>
-                    <span className="social-proof-text">Used <strong>{Math.floor(Math.random() * 50) + 10}</strong> times today</span>
+                    <span className="social-proof-text">Used <strong suppressHydrationWarning>{Math.floor(Math.random() * 50) + 10}</strong> times today</span>
                   </div>
                 </div>
                 <div className="coupon-action">
