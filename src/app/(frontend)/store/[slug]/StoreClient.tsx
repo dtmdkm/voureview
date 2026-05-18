@@ -127,13 +127,15 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
           
           <div className="store-profile-header">
             <div className="store-logo-wrap">
-              <Image 
-                src={data.image || '/favicon.png'} 
-                alt={`${data.name} Logo`} 
-                width={140} 
-                height={140} 
-                style={{ objectFit: 'contain' }}
-              />
+              <a href={data.link || '#'} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 20 }}>
+                <Image 
+                  src={data.image || '/favicon.png'} 
+                  alt={`${data.name} Logo`} 
+                  width={140} 
+                  height={140} 
+                  style={{ objectFit: 'contain' }}
+                />
+              </a>
             </div>
             <div className="store-info-wrap">
               <h1 className="store-title-main">
@@ -187,6 +189,42 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
             </div>
           </div>
 
+          <div className="sidebar-card" style={{ padding: '24px', textAlign: 'left', border: '1px solid #e2e8f0', borderRadius: '12px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0052ff', fill: '#0052ff', stroke: 'white' }}>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <polyline points="9 12 11 14 15 10" />
+              </svg>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#111827', margin: 0 }}>Why Trust Us</h4>
+            </div>
+            <p style={{ fontSize: '0.9rem', color: '#1f2937', fontWeight: 600, marginBottom: '16px' }}>Real deals, chosen by real experts</p>
+            
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '12px' }}>
+              <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                <span>Dedicated merchandising team sources and verifies <strong>{data.name}</strong> coupons</span>
+              </li>
+              <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                <span>Every promo code checked against the fine print</span>
+              </li>
+              <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                <span>All coupons sourced in-house — no AI or third-party reliance</span>
+              </li>
+              <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                <span>Database updated daily — last verified <strong suppressHydrationWarning>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong></span>
+              </li>
+            </ul>
+            
+            <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #e2e8f0' }}>
+              <a href="/legal" style={{ color: '#0052ff', fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none' }}>
+                Learn how we verify coupons →
+              </a>
+            </div>
+          </div>
+
           <div className="sidebar-card" style={{ padding: '24px', textAlign: 'center' }}>
             <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '15px', color: '#111827' }}>Rating & Votes</h4>
             <div style={{ marginBottom: '15px' }}>
@@ -195,7 +233,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
                 {displayRating.toFixed(1)} <span style={{ color: '#94a3b8', fontWeight: 400, fontSize: '0.9rem' }}>/ 5.0</span>
               </div>
               <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '4px' }}>
-                {displayVotes.toLocaleString()} votes
+                {displayVotes.toLocaleString('en-US')} votes
               </div>
             </div>
             <button 
