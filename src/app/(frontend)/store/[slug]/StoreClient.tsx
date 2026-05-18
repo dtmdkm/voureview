@@ -126,10 +126,22 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
           </div>
           
           <div className="store-profile-header">
-            <div 
+            <button 
               className="store-logo-wrap" 
-              style={{ position: 'relative', zIndex: 999, userSelect: 'none', WebkitUserSelect: 'none', cursor: 'pointer' }}
-              onClick={() => deals.length > 0 && handleOpenDeal(deals[0])}
+              style={{ 
+                position: 'relative', zIndex: 9999, userSelect: 'none', WebkitUserSelect: 'none', 
+                cursor: 'pointer', border: 'none', outline: 'none', display: 'flex', pointerEvents: 'auto',
+                padding: '10px', background: 'white'
+              }}
+              onClick={() => {
+                const storeDeals = (data as any).deals || [];
+                if (storeDeals && storeDeals.length > 0) {
+                  handleOpenDeal(storeDeals[0]);
+                } else if (data.link && data.link !== '#') {
+                  const url = data.link.startsWith('http') ? data.link : `https://${data.link}`;
+                  window.open(url, '_blank', 'noopener,noreferrer');
+                }
+              }}
             >
               <Image 
                 src={data.image || '/favicon.png'} 
@@ -138,7 +150,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
                 height={140} 
                 style={{ objectFit: 'contain', position: 'relative', zIndex: 1 }}
               />
-            </div>
+            </button>
             <div className="store-info-wrap">
               <h1 className="store-title-main">
                 {data.name} Promo Codes & Coupons
