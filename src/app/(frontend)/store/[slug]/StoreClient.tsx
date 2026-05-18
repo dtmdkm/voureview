@@ -126,17 +126,19 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
           </div>
           
           <div className="store-profile-header">
-            <a href={data.link || '#'} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', textDecoration: 'none', position: 'relative', zIndex: 999, pointerEvents: 'auto' }}>
-              <div className="store-logo-wrap" style={{ cursor: 'pointer', pointerEvents: 'auto', position: 'relative', zIndex: 999 }}>
-                <Image 
-                  src={data.image || '/favicon.png'} 
-                  alt={`${data.name} Logo`} 
-                  width={140} 
-                  height={140} 
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
-            </a>
+            <div 
+              className="store-logo-wrap" 
+              style={{ position: 'relative', zIndex: 999, userSelect: 'none', WebkitUserSelect: 'none', cursor: 'pointer' }}
+              onClick={() => deals.length > 0 && handleOpenDeal(deals[0])}
+            >
+              <Image 
+                src={data.image || '/favicon.png'} 
+                alt={`${data.name} Logo`} 
+                width={140} 
+                height={140} 
+                style={{ objectFit: 'contain', position: 'relative', zIndex: 1 }}
+              />
+            </div>
             <div className="store-info-wrap">
               <h1 className="store-title-main">
                 {data.name} Promo Codes & Coupons

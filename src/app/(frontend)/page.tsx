@@ -63,6 +63,7 @@ export default async function HomePage() {
 
   const stores = (popularStores as any[]).map(s => ({
     ...s,
+    _id: s._id.toString(),
     dealCount: dealCounts[s._id.toString()] || 0,
     bestDiscount: storeBestDiscounts[s._id.toString()] || null
   }));
