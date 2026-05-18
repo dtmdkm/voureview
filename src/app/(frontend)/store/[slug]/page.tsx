@@ -64,11 +64,18 @@ function StoreHeroShell({ store }: any) {
       )}
       <div className="store-profile-header">
         <div className="store-logo-wrap" style={{ position: 'relative', width: '120px', height: '120px' }}>
+          <a 
+            href={store.link ? (store.link.startsWith('http') ? store.link : `https://${store.link}`) : '#'} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, display: 'block', cursor: 'pointer' }}
+            title={`Visit ${store.name}`}
+          />
           {isDataUrl(store.image || '') ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={store.image || '/favicon.png'} alt="Logo" style={{ width: '120px', height: '120px', objectFit: 'contain' }} />
+            <img src={store.image || '/favicon.png'} alt="Logo" style={{ width: '120px', height: '120px', objectFit: 'contain', position: 'relative', zIndex: 1 }} />
           ) : (
-            <Image src={store.image || '/favicon.png'} alt="Logo" width={120} height={120} priority style={{ objectFit: 'contain' }} />
+            <Image src={store.image || '/favicon.png'} alt="Logo" width={120} height={120} priority style={{ objectFit: 'contain', position: 'relative', zIndex: 1 }} />
           )}
         </div>
         <div className="store-info-wrap">
