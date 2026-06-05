@@ -9,7 +9,7 @@ export default async function DealsPage() {
 
   const [deals, stores] = await Promise.all([
     Deal.find()
-      .select('title storeId type discountValue clicks status isApproved isVerified createdAt updatedAt')
+      .select('title storeId type discountValue clicks status isApproved isVerified createdAt updatedAt image')
       .populate('storeId', 'name image')
       .sort({ createdAt: -1 })
       .lean(),

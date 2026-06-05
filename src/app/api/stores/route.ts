@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     let query = Store.find().sort({ createdAt: -1 });
 
     if (list === '1') {
-      query = query.select('-image -banner -content -faqs -seoTitle -seoKeywords -seoDescription');
+      query = query.select('-banner -content -faqs -seoTitle -seoKeywords -seoDescription');
     }
 
     const stores = await query.lean();

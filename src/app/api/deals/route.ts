@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     }
 
     const deals = await Deal.find()
-      .select('title storeId type discountValue clicks status isApproved isVerified createdAt updatedAt')
+      .select('title storeId type discountValue clicks status isApproved isVerified createdAt updatedAt image')
       .populate('storeId', 'name image')
       .sort({ createdAt: -1 });
     return NextResponse.json(deals);

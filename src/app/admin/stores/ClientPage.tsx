@@ -345,7 +345,7 @@ export default function ClientPage({ initialStores, categories, events, dealStat
                       <div className="flex items-center gap-4">
                         {store.image ? (
                           <div className="w-12 h-12 rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1 shrink-0 flex items-center justify-center">
-                            <img src={store.image} alt="" className="w-full h-full object-contain" />
+                            <img src={store.image} alt="" loading="lazy" className="w-full h-full object-contain" />
                           </div>
                         ) : (
                           <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center text-white text-[16px] font-black shrink-0 shadow-sm", avatarColor)}>

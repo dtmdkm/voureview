@@ -265,7 +265,7 @@ export default function ClientPage({ initialDeals, initialStores }: ClientPagePr
                       <div className="flex items-center gap-4">
                         {deal.image ? (
                           <div className="w-12 h-12 rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden shrink-0 flex items-center justify-center p-1">
-                            <img src={deal.image} className="w-full h-full object-contain" alt="" />
+                            <img src={deal.image} loading="lazy" className="w-full h-full object-contain" alt="" />
                           </div>
                         ) : (
                           <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 text-xs shrink-0 font-black border border-slate-100 shadow-inner">
@@ -289,7 +289,7 @@ export default function ClientPage({ initialDeals, initialStores }: ClientPagePr
                       <div className="flex items-center gap-3">
                         {store?.image ? (
                           <div className="w-8 h-8 rounded-xl border border-slate-100 bg-white shadow-sm overflow-hidden shrink-0 p-0.5">
-                            <img src={store.image} className="w-full h-full object-contain" alt="" />
+                            <img src={store.image} loading="lazy" className="w-full h-full object-contain" alt="" />
                           </div>
                         ) : (
                           <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 text-[10px] font-black shrink-0 border border-slate-200/50">{initial}</div>
