@@ -15,12 +15,16 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   }
 }
 
+import { revalidatePath } from 'next/cache';
+
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectToDatabase();
     const { id } = await params;
     const body = await request.json();
     const updatedPost = await BlogPost.findByIdAndUpdate(id, body, { new: true });
+    revalidatePath('/');
+    revalidatePath('/blog');
     return NextResponse.json(updatedPost);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
@@ -32,6 +36,8 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     await connectToDatabase();
     const { id } = await params;
     await BlogPost.findByIdAndDelete(id);
+    revalidatePath('/');
+    revalidatePath('/blog');
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });

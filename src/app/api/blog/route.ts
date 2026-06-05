@@ -16,6 +16,8 @@ export async function GET() {
   }
 }
 
+import { revalidatePath } from 'next/cache';
+
 export async function POST(request: Request) {
   try {
     await connectToDatabase();
@@ -26,6 +28,11 @@ export async function POST(request: Request) {
     }
 
     const post = await BlogPost.create(body);
+    
+    // Clear the cache so the homepage and blog page show the new post immediately
+    revalidatePath('/');
+    revalidatePath('/blog');
+    
     return NextResponse.json(post);
   } catch (error: any) {
     if (error.code === 11000) {
