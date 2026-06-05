@@ -71,7 +71,6 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
       const res = await fetch('/api/blog', { cache: 'no-store' });
       const d = await res.json();
       if (Array.isArray(d)) setPosts(d);
-      router.refresh();
     } catch (err) {
       console.error('Failed to refresh posts:', err);
     }
@@ -120,7 +119,6 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
       const res = await fetch(`/api/blog/${id}`, { method: 'DELETE' });
       if (res.ok) {
         setPosts(posts.filter(p => (p._id || p.id) !== id));
-        router.refresh();
       } else {
         alert('Lỗi: Server từ chối xóa bài viết này!');
       }
