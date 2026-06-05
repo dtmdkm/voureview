@@ -322,24 +322,9 @@ header.site-header {
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
-  border-right: 2px dashed #e2e8f0; 
   padding: 10px 10px; 
   color: var(--primary); 
-  position: relative;
 }
-/* Little cut-outs for the dashed line effect */
-.save-badge::before, .save-badge::after {
-  content: '';
-  position: absolute;
-  right: -8px;
-  width: 16px;
-  height: 16px;
-  background: var(--bg);
-  border-radius: 50%;
-  z-index: 5;
-}
-.save-badge::before { top: -8px; }
-.save-badge::after { bottom: -8px; }
 
 .save-badge .amount { font-size: 1.8rem; font-weight: 900; color: #ff5252; text-align: center; white-space: normal; line-height: 1.15; overflow-wrap: break-word; word-break: normal; padding: 0; width: 100%; }
 .save-badge .label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #ff5252; margin-top: 2px; text-align: center; opacity: 0.8; }
@@ -606,8 +591,8 @@ aside { position: sticky; top: 100px; }
 .tab { padding: 8px 16px; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 0.85rem; cursor: pointer; background: #f8fafc; color: #64748b; border: 1px solid #f1f5f9; border-bottom: none; transition: 0.2s; }
 .tab.active { background: #3258b3; color: white; border-color: #3258b3; }
 
-.coupon-card { background: white; border-radius: 12px; border: 1px solid #e8edf2; margin-bottom: 16px; display: grid; grid-template-columns: 260px 1fr 200px; gap: 0; align-items: stretch; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: 0.25s; overflow: hidden; }
-.coupon-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); border-color: #3258b3; }
+.coupon-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px; display: grid; grid-template-columns: 260px 1fr 200px; gap: 0; align-items: stretch; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: 0.25s; overflow: hidden; }
+.coupon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: #3258b3; }
 
 /* Left panel: store logo + discount */
 .deal-left { display: flex; align-items: center; gap: 16px; padding: 10px 24px; border-right: 1px solid #f1f5f9; background: #fafafa; }
@@ -633,7 +618,7 @@ aside { position: sticky; top: 100px; }
 .coupon-info { padding: 12px 28px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
 .verified-tag { color: #3258b3; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px; width: fit-content; }
 .verified-tag::before { content: '✓'; }
-.coupon-info h3 { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; margin: 0; }
+.coupon-info h3 { font-size: 1.35rem; font-weight: 800; color: #0f172a; line-height: 1.4; margin: 0; }
 .deal-store-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); text-decoration: none; }
 .deal-store-link:hover { text-decoration: underline; }
 
