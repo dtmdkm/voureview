@@ -229,11 +229,11 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
                   <td className="px-6 py-6 text-center">
                     <span className={cn(
                       "text-[10px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-xl border transition-all duration-300",
-                      post.status === 'published' 
+                      post.status === 'active' 
                         ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
                         : "bg-amber-50 text-amber-600 border-amber-100 shadow-sm"
                     )}>
-                      {post.status === 'published' ? 'Đã đăng' : 'Bản nháp'}
+                      {post.status === 'active' ? 'Đã đăng' : 'Bản nháp'}
                     </span>
                   </td>
                   <td className="px-6 py-6 text-center">
@@ -423,7 +423,7 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
                           value={formData.status} 
                           onChange={e => set('status', e.target.value)}
                         >
-                          <option value="published">Công khai ngay (Published)</option>
+                          <option value="active">Công khai ngay (Active)</option>
                           <option value="draft">Lưu bản nháp (Draft)</option>
                         </select>
                       </div>
