@@ -10,11 +10,17 @@ export async function GET() {
     
     // Fetch all data concurrently
     const [popularStores, deals, categories, blogPosts, eventSales, settingsList] = await Promise.all([
-      Store.find({ status: 'active' }),
-      Deal.find({}).populate('storeId'),
-      Category.find({}),
-      BlogPost.find({ status: 'active' }).sort({ createdAt: -1 }).limit(10),
-      EventSale.find({ status: 'active' }),
+      Store.find({ status: 'active' })
+        .select('_id name slug image isFeatured clicks')
+        .limit(500),
+      Deal.find({})
+        .populate({ path: 'storeId', select: '_id name slug' })
+        .select('_id title type code discountValue discountPrice price expireAt storeId clicks isVerified')
+        .sort({ clicks: -1 })
+        .limit(500),
+      Category.find({}).select('_id name slug icon'),
+      BlogPost.find({ status: 'active' }).select('_id title slug image summary createdAt category').sort({ createdAt: -1 }).limit(10),
+      EventSale.find({ status: 'active' }).select('_id name slug icon'),
       Setting.find({})
     ]);
 
