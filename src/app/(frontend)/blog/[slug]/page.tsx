@@ -4,9 +4,10 @@ import { BlogPost } from '@/models';
 
 export const revalidate = 3600;
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   await connectToDatabase();
-  const post = await BlogPost.findOne({ slug: params.slug }).lean();
+  const { slug } = await params;
+  const post = await BlogPost.findOne({ slug }).lean();
   
   if (!post) return { title: 'Post Not Found' };
   
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   await connectToDatabase();
+  const { slug } = await params;
   
-  const post = await BlogPost.findOne({ slug: params.slug }).lean();
+  const post = await BlogPost.findOne({ slug }).lean();
   
   if (!post || post.status !== 'active') {
     notFound();
@@ -34,21 +36,21 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       
       <article className="post-container">
         <header className="post-header" style={{ marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '2.5rem', color: 'white', marginBottom: '20px' }}>{post.title}</h1>
-          <div className="post-meta" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          <h1 style={{ fontSize: '2.5rem', color: '#1e293b', marginBottom: '20px', fontWeight: 800 }}>{post.title}</h1>
+          <div className="post-meta" style={{ color: '#64748b', fontSize: '0.95rem', fontWeight: 500 }}>
             {post.category && <span style={{ marginRight: '20px' }}>📁 {post.category}</span>}
-            <span>📅 {new Date(post.createdAt).toLocaleDateString()}</span>
+            <span>📅 {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}</span>
           </div>
         </header>
 
         {post.image && (
-          <img src={post.image} alt={post.title} style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', borderRadius: '24px', marginBottom: '40px' }} />
+          <img src={post.image} alt={post.title} style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', borderRadius: '24px', marginBottom: '40px', boxShadow: '0 10px 30px rgba(0,0,0,0.08)' }} />
         )}
 
         <div 
           className="post-content" 
           dangerouslySetInnerHTML={{ __html: post.content }} 
-          style={{ lineHeight: 1.8, color: '#cbd5e1', fontSize: '1.1rem' }}
+          style={{ lineHeight: 1.8, color: '#334155', fontSize: '1.1rem' }}
         />
       </article>
     </main>

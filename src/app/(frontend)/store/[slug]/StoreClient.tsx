@@ -273,7 +273,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
             </button>
           </div>
 
-          <div id="coupons-list" style={{ background: '#f8fafc', padding: '25px', borderRadius: '16px', border: '1px solid #f1f5f9', margin: '0 -15px' }}>
+          <div id="coupons-list">
             {filteredDeals.map((deal: any) => (
               <div key={deal._id} className="coupon-card">
                 <div className="save-badge">

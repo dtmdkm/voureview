@@ -1,10 +1,10 @@
 :root {
   --primary: #001d5e; 
   --primary-dark: #001340;
-  --accent: #3258b3; 
-  --header-bg: #ffffff; 
+  --accent: #205aa7; 
+  --header-bg: var(--accent); 
   --footer-bg: #f8f9fa; /* Light Footer */
-  --bg: #ffffff;
+  --bg: #f1f5f9; /* Soft gray page background to make cards pop */
   --text: #333333;
   --text-muted: #6b7280;
   --white: #ffffff;
@@ -25,22 +25,21 @@ header.site-header {
   padding: 0.75rem 0; 
   position: sticky; 
   top: 0; 
-  z-index: 1000; 
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
 .logo { display: flex; align-items: center; text-decoration: none; gap: 4px; }
 .logo-img { height: 44px; width: 44px; object-fit: contain; object-position: center; transition: opacity 0.2s; }
 .logo:hover .logo-img { opacity: 0.85; }
-.logo-text { font-family: var(--font-outfit, 'Outfit', sans-serif); font-size: 1.4rem; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+.logo-text { font-family: var(--font-outfit, 'Outfit', sans-serif); font-size: 1.4rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; }
 
 .header-search-wrapper { flex: 0 1 250px; }
 .search-bar-container { position: relative; width: 100%; }
 
 .site-nav { display: flex; gap: 30px; }
-.site-nav a { font-size: 0.95rem; font-weight: 500; color: #555; transition: 0.2s; }
-.site-nav a:hover { color: var(--accent); }
+.site-nav a { font-size: 0.95rem; font-weight: 500; color: #ffffff; transition: 0.2s; }
+.site-nav a:hover { color: #cbd5e1; }
 .search-bar { width: 100%; position: relative; display: flex; align-items: center; justify-content: flex-end; }
 .search-bar button {
   position: absolute;
@@ -315,15 +314,15 @@ header.site-header {
 .coupon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-color: var(--primary); }
 
 .save-badge { 
-  width: 180px; 
-  min-width: 180px;
+  width: 100%; 
   background: #ffffff; 
   display: flex; 
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
-  padding: 10px 10px; 
+  padding: 10px 15px; 
   color: var(--primary); 
+  border-right: 2px dashed #e2e8f0;
 }
 
 .save-badge .amount { font-size: 1.8rem; font-weight: 900; color: #ff5252; text-align: center; white-space: normal; line-height: 1.15; overflow-wrap: break-word; word-break: normal; padding: 0; width: 100%; }
@@ -445,9 +444,9 @@ header.site-header {
   align-items: center;
 }
 .category-btn:hover { 
-  background: #f0fdf4; 
-  color: #3258b3; 
-  border-color: #3258b3;
+  background: var(--accent); 
+  color: #ffffff !important; 
+  border-color: var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(50, 88, 179, 0.1);
 }
@@ -591,7 +590,7 @@ aside { position: sticky; top: 100px; }
 .tab { padding: 8px 16px; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 0.85rem; cursor: pointer; background: #f8fafc; color: #64748b; border: 1px solid #f1f5f9; border-bottom: none; transition: 0.2s; }
 .tab.active { background: #3258b3; color: white; border-color: #3258b3; }
 
-.coupon-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px; display: grid; grid-template-columns: 260px 1fr 200px; gap: 0; align-items: stretch; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: 0.25s; overflow: hidden; }
+.coupon-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px; display: grid; grid-template-columns: 180px 1fr 200px; gap: 0; align-items: stretch; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: 0.25s; overflow: hidden; }
 .coupon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: #3258b3; }
 
 /* Left panel: store logo + discount */
@@ -1389,7 +1388,7 @@ aside { position: sticky; top: 100px; }
   transition: color 0.2s;
   font-weight: 500;
 }
-.category-item:hover { color: var(--accent); }
+.category-item:hover { color: #ffffff !important; background: var(--accent); border-radius: 6px; padding: 0 5px; }
 
 /* See More Stores Button */
 .btn-see-more {
