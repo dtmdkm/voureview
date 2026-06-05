@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export default async function AdminBlog() {
   await connectToDatabase();
   const rawPosts = await BlogPost.find({})
-    .select('title slug summary category status createdAt')
+    .select('title slug image summary category status createdAt')
     .sort({ createdAt: -1 })
     .lean();
   const posts = rawPosts.map((p: any) => ({
