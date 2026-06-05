@@ -117,11 +117,15 @@ export default function BlogClientPage({ initialPosts }: { initialPosts: any[] }
   const handleDelete = async (id: string) => {
     if (!confirm('Xóa bài viết này?')) return;
     try {
-      await fetch(`/api/blog/${id}`, { method: 'DELETE' });
-      setPosts(posts.filter(p => (p._id || p.id) !== id));
-      router.refresh();
+      const res = await fetch(`/api/blog/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setPosts(posts.filter(p => (p._id || p.id) !== id));
+        router.refresh();
+      } else {
+        alert('Lỗi: Server từ chối xóa bài viết này!');
+      }
     } catch (err) {
-      alert('Lỗi khi xóa bài viết');
+      alert('Lỗi khi kết nối đến máy chủ để xóa bài viết');
     }
   };
 
