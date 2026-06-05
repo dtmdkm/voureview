@@ -9,7 +9,7 @@ export default async function StoresPage() {
 
   // Fetch all data in parallel on the server
   const [stores, categories, events, deals] = await Promise.all([
-    Store.find().sort({ createdAt: -1 }).select('name slug categoryId status isFeatured isApproved createdAt updatedAt').lean(),
+    Store.find().sort({ createdAt: -1 }).select('name slug image categoryId status isFeatured isApproved createdAt updatedAt').lean(),
     Category.find().select('name id _id').lean(),
     EventSale.find().select('name id _id').lean(),
     Deal.find().select('storeId clicks').lean()
