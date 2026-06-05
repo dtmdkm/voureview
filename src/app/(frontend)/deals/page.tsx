@@ -13,8 +13,13 @@ export default async function DealsPage() {
   await connectToDatabase();
 
   const [deals, stores] = await Promise.all([
-    Deal.find({}).populate('storeId').sort({ sortOrder: 1, createdAt: -1 }).lean(),
-    Store.find({ status: 'active' }).lean(),
+    Deal.find({})
+      .populate({ path: 'storeId', select: '_id name slug image' })
+      .select('_id title description type code discountValue discountPrice price expireAt isVerified verifyDate clicks storeId')
+      .sort({ sortOrder: 1, createdAt: -1 })
+      .limit(500)
+      .lean(),
+    Store.find({ status: 'active' }).select('_id name').lean(),
   ]);
 
   const activeStoreIds = new Set(stores.map((s: any) => s._id.toString()));
