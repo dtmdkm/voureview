@@ -1083,7 +1083,7 @@ aside { position: sticky; top: 100px; }
 .coupon-items a { display: flex; align-items: center; padding: 15px 10px; text-decoration: none; color: inherit; }
 .coupon-items .image { flex: 0 0 250px; display: flex; align-items: center; margin-right: 20px; text-align: left; }
 .coupon-items .image img { width: 90px; height: 60px; object-fit: contain; margin-right: 12px; border-radius: 6px; background: #f7f7f7; border: 1px solid #eee; padding: 4px; }
-.coupon-items .image h3 { font-size: 1rem; margin: 0; color: #000; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.coupon-items .image h3 { font-size: 1rem; margin: 0; color: #000; font-weight: 700; white-space: normal; word-break: break-word; line-height: 1.3; }
 .coupon-items .coupon { flex: 1; text-align: center; }
 .coupon-items .coupon-count { font-size: 0.9rem; color: #666; font-weight: 500; }
 .coupon-items .cash-back { flex: 0 0 150px; text-align: center; color: #ff5252; font-weight: 700; }
@@ -1435,13 +1435,72 @@ aside { position: sticky; top: 100px; }
   .blogs-grid { grid-template-columns: repeat(2, 1fr); }
   .categories-list { grid-template-columns: repeat(3, 1fr); }
   .stores-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
+@media (max-width: 768px) {
+  header.site-header { padding: 10px 0; }
+  .header-inner { flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+  .logo-img { height: 36px; width: 36px; }
+  .logo-text { font-size: 1.3rem; }
+  .site-nav { 
+    display: flex; 
+    overflow-x: auto; 
+    width: 100%; 
+    order: 4; 
+    gap: 15px;
+    padding-top: 5px;
+    scrollbar-width: none;
+  }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .site-nav a { font-size: 0.9rem; white-space: nowrap; }
+  .header-search-wrapper { flex: 1 1 100%; order: 3; margin-top: 0; }
+  .search-bar input { padding: 0.6rem 2.5rem 0.6rem 1rem; font-size: 0.9rem; }
+  .container { padding: 0 15px; }
+  
+  .hero-sec { padding: 30px 0 !important; }
+  .hero-title { font-size: 1.8rem !important; }
+  .hero-subtitle { font-size: 0.95rem !important; margin-bottom: 20px !important; }
+  .hero-stats { flex-direction: column; gap: 10px !important; margin-top: 20px !important; }
+  .hero-stat-item { min-width: 100%; padding: 15px; }
+  
+  .section-title { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 30px; margin-bottom: 15px; }
+  .slider-nav { align-self: flex-end; margin-top: -35px; }
+  
+  .list-filters { padding: 10px; gap: 4px; justify-content: center; }
+  .list-filters li a, .list-filters li button.alphabet-link { padding: 4px 6px; font-size: 12px; border: none; border-radius: 4px; }
+  .list-filters li.active button.alphabet-link { background: rgba(255,255,255,0.2); }
+}
+
 @media (max-width: 600px) {
-  .blogs-grid { grid-template-columns: 1fr; }
-  .categories-list { grid-template-columns: repeat(2, 1fr); }
+  .blogs-grid { grid-template-columns: 1fr; gap: 20px; }
+  .categories-list { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .savings-grid { grid-template-columns: 1fr; gap: 30px; }
   .savings-item { text-align: center; }
   .savings-icon { display: flex; justify-content: center; }
-  .stores-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .store-grid-logo { width: 80px; height: 80px; }
+  
+  /* Fix aggressive store truncation */
+  .stores-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+  .store-grid-card { padding: 15px 10px; }
+  .store-grid-logo { width: 60px; height: 60px; margin-bottom: 10px; }
+  .store-name, .store-grid-name { font-size: 0.85rem; white-space: normal !important; overflow: visible !important; display: block; line-height: 1.3; }
+  
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+  .footer-social { justify-content: center; }
+  
+  .deals-filter-bar { flex-wrap: wrap; justify-content: flex-start; gap: 10px; }
+  .deals-filter-btn { flex: 1 1 calc(50% - 10px); text-align: center; justify-content: center; padding: 10px; font-size: 0.85rem; }
+  
+  .coupon-items a { flex-direction: column; gap: 10px; text-align: center; padding: 15px; }
+  .coupon-items .image { flex: unset; width: 100%; justify-content: center; margin-right: 0; flex-direction: column; gap: 10px; text-align: center; }
+  .coupon-items .image img { margin-right: 0; margin-bottom: 5px; }
+  .coupon-items .coupon { flex: unset; width: 100%; }
+  .coupon-items .cash-back { flex: unset; width: 100%; }
+  .coupon-items .coupon-items-btn { flex: unset; width: 100%; text-align: center; }
+  .coupon-items .coupon-items-btn span { display: block; }
+  
+  .deal-card { padding: 0; flex-direction: column; }
+  .deal-left { flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 15px; border-right: none; border-bottom: 1px dashed #e2e8f0; width: 100%; }
+  .deal-right { padding: 15px; flex-direction: column; text-align: center; width: 100%; }
+  .deal-right .deal-meta { justify-content: center; }
+  .btn-get-code { width: 100%; justify-content: center; margin-top: 10px; }
 }
