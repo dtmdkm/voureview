@@ -25,13 +25,13 @@ export default function CarouselWrapper({
   return (
     <section className={className}>
       {title && (
-        <div className="sec-title">
+        <div className="section-title">
           <h2>{title}</h2>
         </div>
       )}
       <div className="slider-container">
         <button className="slider-nav prev" onClick={() => scrollSlider('left')} aria-label="Previous">&lsaquo;</button>
-        <div className="swiper-wrapper custom-scroll-snap" ref={scrollRef}>
+        <div className="stores-slider custom-scroll-snap" ref={scrollRef}>
           {children}
         </div>
         <button className="slider-nav next" onClick={() => scrollSlider('right')} aria-label="Next">&rsaquo;</button>

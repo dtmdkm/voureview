@@ -25,6 +25,7 @@ header.site-header {
   padding: 0.75rem 0; 
   position: sticky; 
   top: 0; 
+  z-index: 999;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
@@ -177,6 +178,11 @@ header.site-header {
 .slider-container { position: relative; margin: 0 -10px; }
 .stores-slider { display: flex; overflow-x: auto; gap: 20px; padding: 20px 10px; scrollbar-width: none; -ms-overflow-style: none; }
 .stores-slider::-webkit-scrollbar { display: none; }
+.stores-slider .swiper-slide { flex: 0 0 auto; transition: 0.3s; }
+.stores-slider .logo-slide { width: 140px; }
+.stores-slider .offer-slide { width: 240px; }
+.cash-back-card { background: white; border-radius: 12px; border: 1px solid #f1f5f9; box-shadow: 0 4px 10px rgba(0,0,0,0.02); overflow: hidden; transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
+.cash-back-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); border-color: var(--primary); }
 .store-card { 
   flex: 0 0 auto; 
   background: white; 
@@ -906,7 +912,11 @@ aside { position: sticky; top: 100px; }
     border-top: 1px solid #f1f5f9;
   }
   .blog-grid { grid-template-columns: 1fr; }
+  .hide-on-mobile { display: none !important; }
+  .show-on-mobile { display: block !important; }
 }
+
+.show-on-mobile { display: none !important; }
 
 /* Deal Thumbnail Column (replaces save-badge on homepage) */
 .deal-thumb {
@@ -1480,6 +1490,8 @@ aside { position: sticky; top: 100px; }
   
   /* Fix aggressive store truncation */
   .stores-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+  .stores-slider .swiper-slide { min-width: 180px; }
+  .stores-slider .logo-slide { min-width: 130px; }
   .store-grid-card { padding: 15px 10px; }
   .store-grid-logo { width: 60px; height: 60px; margin-bottom: 10px; }
   .store-name, .store-grid-name { font-size: 0.85rem; white-space: normal !important; overflow: visible !important; display: block; line-height: 1.3; }

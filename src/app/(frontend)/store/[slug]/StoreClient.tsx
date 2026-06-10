@@ -203,7 +203,7 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
             </div>
           </div>
 
-          <div className="sidebar-card" style={{ padding: '24px', textAlign: 'left', border: '1px solid #e2e8f0', borderRadius: '12px', marginBottom: '24px' }}>
+          <div className="sidebar-card hide-on-mobile" style={{ padding: '24px', textAlign: 'left', border: '1px solid #e2e8f0', borderRadius: '12px', marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0052ff', fill: '#0052ff', stroke: 'white' }}>
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -318,6 +318,36 @@ export default function StoreClient({ data, settings, eventSales, hideHero = fal
               style={{ whiteSpace: 'pre-wrap' }}
               dangerouslySetInnerHTML={{ __html: data.content || `Save more with verified coupons for ${data.name}.` }} 
             />
+            
+            <div className="sidebar-card show-on-mobile" style={{ padding: '24px', textAlign: 'left', border: '1px solid #e2e8f0', borderRadius: '12px', marginBottom: '40px', marginTop: '30px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0052ff', fill: '#0052ff', stroke: 'white' }}>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <polyline points="9 12 11 14 15 10" />
+                </svg>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#111827', margin: 0 }}>Why Trust Us</h4>
+              </div>
+              <p style={{ fontSize: '0.9rem', color: '#1f2937', fontWeight: 600, marginBottom: '16px' }}>Real deals, chosen by real experts</p>
+              
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '12px' }}>
+                <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                  <span>Dedicated merchandising team sources and verifies <strong>{data.name}</strong> coupons</span>
+                </li>
+                <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                  <span>Every promo code checked against the fine print</span>
+                </li>
+                <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                  <span>All coupons sourced in-house — no AI or third-party reliance</span>
+                </li>
+                <li style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#374151', lineHeight: '1.5' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}><polyline points="20 6 9 17 4 12" /></svg>
+                  <span>Database updated daily — last verified <strong suppressHydrationWarning>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong></span>
+                </li>
+              </ul>
+            </div>
             
             <div className="how-to-apply">
               <h3>How to use a {data.name} promo code</h3>

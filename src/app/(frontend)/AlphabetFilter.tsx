@@ -20,11 +20,21 @@ interface Props {
 export default function AlphabetFilter({ stores }: Props) {
   const [activeLetter, setActiveLetter] = useState('All');
 
+  const formatDiscount = (val: any) => {
+    if (!val) return 'Verified Deal';
+    if (typeof val === 'string' && val.match(/^\$(\d{3,})$/)) {
+      const numStr = val.substring(1);
+      return `$${numStr.slice(0, -2)}.${numStr.slice(-2)}`;
+    }
+    return val;
+  };
+
   const filtered = activeLetter === 'All'
     ? stores.slice(0, 10)
     : stores.filter((s) => {
-        if (activeLetter === '#') return /^[^a-zA-Z]/.test(s.name);
-        return s.name.toUpperCase().startsWith(activeLetter);
+        const name = s.name || '';
+        if (activeLetter === '#') return /^[^a-zA-Z]/.test(name);
+        return name.toUpperCase().startsWith(activeLetter);
       }).slice(0, 10);
 
   return (
@@ -69,7 +79,7 @@ export default function AlphabetFilter({ stores }: Props) {
                     <div className="coupon-count">{(store as any).dealCount || 0} {((store as any).dealCount || 0) > 1 ? 'Coupons' : 'Coupon'}</div>
                   </div>
                   <div className="cash-back">
-                    <span>{(store as any).bestDiscount || 'Verified Deal'}</span>
+                    <span>{formatDiscount((store as any).bestDiscount)}</span>
                   </div>
                   <div className="coupon-items-btn">
                     <span>Shop &amp; Save</span>

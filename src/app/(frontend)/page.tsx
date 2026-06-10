@@ -71,6 +71,15 @@ export default async function HomePage() {
   const posts = blogPosts as any[];
   const categories = popularCategories as any[];
 
+  const formatDiscount = (val: any) => {
+    if (!val) return 'Verified Deal';
+    if (typeof val === 'string' && val.match(/^\$(\d{3,})$/)) {
+      const numStr = val.substring(1);
+      return `$${numStr.slice(0, -2)}.${numStr.slice(-2)}`;
+    }
+    return val;
+  };
+
   return (
     <>
       {/* 1. Banner Slider */}
@@ -98,22 +107,22 @@ export default async function HomePage() {
       <CarouselWrapper title="Top Picks">
         {stores.slice(0, 6).map((store, idx) => {
           const initial = (store.name || 'S').substring(0, 2).toUpperCase();
-          const imgSrc = store.image || `https://placehold.co/400x220/f1f1f1/001d5e?text=${encodeURIComponent(initial)}`;
+          const imgSrc = store.image || `https://placehold.co/240x140/f1f1f1/001d5e?text=${encodeURIComponent(initial)}`;
           return (
-            <div key={store._id} className="swiper-slide">
+            <div key={store._id} className="swiper-slide" style={{ width: '220px' }}>
               <div className="cash-back-card">
                 <Link prefetch={false} href={`/store/${store.slug}`}>
                   <Image
                     src={imgSrc}
                     alt={store.name}
-                    width={400}
-                    height={220}
-                    style={{ objectFit: 'contain', background: '#f5f5f5' }}
+                    width={220}
+                    height={140}
+                    style={{ objectFit: 'contain', background: '#f5f5f5', width: '100%' }}
                     unoptimized={!store.image}
                   />
                   <div className="cash-back-info text-center" style={{ padding: '15px' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>{store.name}</h3>
-                    <span style={{ fontSize: '0.85rem', color: '#ff5252', fontWeight: 900 }}>{store.bestDiscount || 'Verified Deal'}</span>
+                    <span style={{ fontSize: '0.85rem', color: '#ff5252', fontWeight: 900 }}>{formatDiscount(store.bestDiscount)}</span>
                   </div>
                 </Link>
               </div>
@@ -161,13 +170,13 @@ export default async function HomePage() {
                     src={deal.storeId?.image || `https://placehold.co/220x110/fff/333?text=${encodeURIComponent(storeName)}`}
                     alt={storeName}
                     width={220}
-                    height={110}
-                    style={{ objectFit: 'contain' }}
+                    height={140}
+                    style={{ objectFit: 'contain', width: '100%' }}
                     unoptimized={!deal.storeId?.image}
                   />
                   <div className="cash-back-info text-center" style={{ padding: '15px' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>{count} {count > 1 ? 'Coupons' : 'Coupon'}</h3>
-                    <div style={{ fontSize: '0.85rem', color: '#ff5252', fontWeight: 900, marginBottom: '8px' }}>
+                    <div style={{ fontSize: '0.9rem', color: '#ff5252', fontWeight: 900, marginBottom: '8px', letterSpacing: '0.5px' }}>
                       {displayDiscount}
                     </div>
                     {deal.description && (
