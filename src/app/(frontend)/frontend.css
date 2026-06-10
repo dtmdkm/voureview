@@ -912,11 +912,7 @@ aside { position: sticky; top: 100px; }
     border-top: 1px solid #f1f5f9;
   }
   .blog-grid { grid-template-columns: 1fr; }
-  .hide-on-mobile { display: none !important; }
-  .show-on-mobile { display: block !important; }
 }
-
-.show-on-mobile { display: none !important; }
 
 /* Deal Thumbnail Column (replaces save-badge on homepage) */
 .deal-thumb {
@@ -1515,4 +1511,12 @@ aside { position: sticky; top: 100px; }
   .deal-right { padding: 15px; flex-direction: column; text-align: center; width: 100%; }
   .deal-right .deal-meta { justify-content: center; }
   .btn-get-code { width: 100%; justify-content: center; margin-top: 10px; }
+}
+
+/* Visibility Utilities */
+.show-on-mobile { display: none !important; }
+
+@media (max-width: 900px) {
+  .hide-on-mobile { display: none !important; }
+  .show-on-mobile { display: block !important; }
 }
