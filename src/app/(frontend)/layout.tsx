@@ -55,7 +55,7 @@ export default async function FrontendLayout({
     <div className={`frontend-wrapper ${inter.variable} ${outfit.variable}`}>
       <div className="frontend-body">
         <header className="site-header">
-          <div className="container header-inner">
+          <div className="container header-inner mobile-header-fix">
             <Link prefetch={false} href="/" className="logo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo.png" alt="Voureview Logo" className="logo-img" />
