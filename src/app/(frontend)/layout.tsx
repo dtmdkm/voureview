@@ -21,15 +21,37 @@ export const revalidate = 3600; // 1 hour edge cache
 
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Voureview | Leading Coupons & Deals Marketplace',
-  description: 'Leading Coupons & Deals Marketplace',
-  icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  await connectToDatabase();
+  const setting = await Setting.findOne({ key: 'site_meta_verify' }).lean();
+  const other: Record<string, string> = {};
+  
+  if (setting && setting.value) {
+    const tags = setting.value.split('>');
+    const nameRegex = /(?:name|property)=['"]([^'"]+)['"]/i;
+    const contentRegex = /content=['"]([^'"]+)['"]/i;
+    for (const tag of tags) {
+      if (tag.toLowerCase().includes('<meta')) {
+        const nameMatch = tag.match(nameRegex);
+        const contentMatch = tag.match(contentRegex);
+        if (nameMatch && contentMatch) {
+          other[nameMatch[1]] = contentMatch[1];
+        }
+      }
+    }
+  }
+
+  return {
+    title: 'Voureview | Leading Coupons & Deals Marketplace',
+    description: 'Leading Coupons & Deals Marketplace',
+    icons: {
+      icon: '/favicon.png',
+      shortcut: '/favicon.png',
+      apple: '/favicon.png',
+    },
+    other: Object.keys(other).length > 0 ? other : undefined,
+  };
+}
 
 export default async function FrontendLayout({
   children,

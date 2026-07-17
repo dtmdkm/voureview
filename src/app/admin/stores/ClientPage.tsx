@@ -52,11 +52,38 @@ export default function ClientPage({ initialStores, categories, events, dealStat
   const [isApproved, setIsApproved] = useState(true);
   const [isFeatured, setIsFeatured] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [checkingMeta, setCheckingMeta] = useState(false);
   const itemsPerPage = 20;
 
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
+
+  const checkMetaTag = async () => {
+    if (!editingStore?.slug || !editingStore?.metaVerify) {
+      alert('Vui lòng lưu cửa hàng và thêm mã meta trước khi kiểm tra!');
+      return;
+    }
+    setCheckingMeta(true);
+    try {
+      const res = await fetch(`/store/${editingStore.slug}?t=${Date.now()}`);
+      const html = await res.text();
+      
+      const nameMatch = editingStore.metaVerify.match(/(?:name|property)=['"]([^'"]+)['"]/i);
+      const contentMatch = editingStore.metaVerify.match(/content=['"]([^'"]+)['"]/i);
+      
+      if (nameMatch && contentMatch && html.includes(nameMatch[1]) && html.includes(contentMatch[1])) {
+        alert('Tuyệt vời! Đã tìm thấy thẻ meta trên trang của cửa hàng.');
+      } else if (nameMatch && html.includes(nameMatch[1])) {
+         alert('Thẻ có vẻ đã được thêm (tìm thấy thuộc tính name/property). Nếu đối tác vẫn không nhận, hãy thử lưu lại và chờ xóa cache.');
+      } else {
+         alert('Chưa tìm thấy thẻ trên trang. Vui lòng đảm bảo bạn đã bấm "Lưu" cửa hàng và chờ vài giây để hệ thống cập nhật bộ đệm (cache).');
+      }
+    } catch (err) {
+      alert('Không thể tải trang cửa hàng để kiểm tra.');
+    }
+    setCheckingMeta(false);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -82,6 +109,7 @@ export default function ClientPage({ initialStores, categories, events, dealStat
         seoTitle: store.seoTitle || '',
         seoKeywords: store.seoKeywords || '',
         seoDescription: store.seoDescription || '',
+        metaVerify: store.metaVerify || '',
         categoryId: store.categoryId || '',
         eventId: store.eventId || '',
         rating: store.rating || 5,
@@ -117,6 +145,7 @@ export default function ClientPage({ initialStores, categories, events, dealStat
         seoTitle: '',
         seoKeywords: '',
         seoDescription: '',
+        metaVerify: '',
         categoryId: '',
         eventId: '',
         rating: 5,
@@ -523,6 +552,46 @@ export default function ClientPage({ initialStores, categories, events, dealStat
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <ImageUpload label="Logo (ảnh vuông)" value={image} onChange={setImage} />
                     <ImageUpload label="Banner (ảnh rộng)" value={banner} onChange={setBanner} />
+                  </div>
+
+                  <div className="space-y-3 bg-indigo-50/30 p-6 rounded-[24px] border border-indigo-100/50">
+                    <Label className="text-[14px] font-black text-slate-800 ml-1 flex items-center gap-2">
+                      Verify Ownership (Mã xác minh)
+                    </Label>
+                    <p className="text-[12px] text-slate-500 font-medium ml-1">
+                      Paste the <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700">&lt;meta&gt;</code> tag here to verify ownership with Partnerboost, Impact, etc. It will be injected into the page <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700">&lt;head&gt;</code>.
+                    </p>
+                    <Textarea 
+                      name="metaVerify" 
+                      value={editingStore?.metaVerify || ''} 
+                      onChange={handleInputChange} 
+                      placeholder={'<meta name="partnerboostverifycode" content="..." />'} 
+                      className="font-mono text-[13px] rounded-2xl border-indigo-200 bg-white p-4 text-slate-700 focus:ring-indigo-500/20 h-24" 
+                    />
+                    <div className="flex items-center gap-3 mt-2">
+                      <Button 
+                        type="button" 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={checkMetaTag}
+                        disabled={checkingMeta || !editingStore?.metaVerify}
+                        className="h-9 px-4 rounded-xl text-indigo-600 border-indigo-200 bg-white hover:bg-indigo-50 font-bold gap-2"
+                      >
+                        {checkingMeta ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />}
+                        Kiểm tra hiển thị
+                      </Button>
+                      <Button 
+                        type="button" 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => setEditingStore((prev: any) => ({ ...prev, metaVerify: '' }))}
+                        disabled={!editingStore?.metaVerify}
+                        className="h-9 px-4 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 font-bold gap-2"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        Xóa mã
+                      </Button>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-slate-50/50 rounded-[32px] border border-slate-100">

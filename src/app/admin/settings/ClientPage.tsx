@@ -129,6 +129,22 @@ export default function SettingsClientPage({ initialSettings }: { initialSetting
                   </div>
                 </div>
               </div>
+
+              <div className="mt-8 bg-indigo-50/30 p-6 rounded-[24px] border border-indigo-100/50">
+                <div className="flex items-center gap-2 mb-4">
+                  <Globe className="h-5 w-5 text-indigo-600" />
+                  <h3 className="text-[17px] font-extrabold text-slate-900 tracking-tight">Site Ownership Verification (Mã xác minh toàn trang)</h3>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-[12px] text-slate-500 font-medium">Paste thẻ <code className="bg-white border border-slate-100 px-1 py-0.5 rounded text-slate-700">&lt;meta&gt;</code> từ Partnerboost, Google Search Console, Impact... Nó sẽ được tự động chèn vào <code className="bg-white border border-slate-100 px-1 py-0.5 rounded text-slate-700">&lt;head&gt;</code> của <strong>Trang chủ gốc</strong> và toàn bộ các trang trên hệ thống.</p>
+                  <textarea
+                    value={settings.site_meta_verify || ''}
+                    onChange={e => set('site_meta_verify', e.target.value)}
+                    placeholder={'<meta name="partnerboostverifycode" content="..." />'}
+                    className="w-full font-mono text-[13px] rounded-2xl border-indigo-200 bg-white p-4 text-slate-700 focus:ring-indigo-500/20 focus:outline-none focus:border-indigo-500 h-24"
+                  />
+                </div>
+              </div>
             </TabsContent>
 
             <TabsContent value="homepage" className="m-0 animate-in fade-in-50 duration-500">

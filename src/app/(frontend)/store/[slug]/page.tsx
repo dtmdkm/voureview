@@ -105,12 +105,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!store) return { title: 'Store Not Found' };
   const title = store.seoTitle || `${store.name} Coupons & Promo Codes | Voureview`;
   const description = store.seoDescription || store.description || `Get the latest ${store.name} coupons and deals verified today.`;
+  
+  const other: Record<string, string> = {};
+  if (store.metaVerify) {
+    const tags = store.metaVerify.split('>');
+    const nameRegex = /(?:name|property)=['"]([^'"]+)['"]/i;
+    const contentRegex = /content=['"]([^'"]+)['"]/i;
+    for (const tag of tags) {
+      if (tag.toLowerCase().includes('<meta')) {
+        const nameMatch = tag.match(nameRegex);
+        const contentMatch = tag.match(contentRegex);
+        if (nameMatch && contentMatch) {
+          other[nameMatch[1]] = contentMatch[1];
+        }
+      }
+    }
+  }
+
   return {
     title,
     description,
     keywords: store.seoKeywords || undefined,
     openGraph: { title, description, type: 'website', images: store.banner ? [store.banner] : [] },
     twitter: { card: 'summary_large_image', title, description },
+    other: Object.keys(other).length > 0 ? other : undefined,
   };
 }
 

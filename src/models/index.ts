@@ -22,6 +22,7 @@ const StoreSchema = new mongoose.Schema({
   isApproved: { type: Boolean, default: true },
   isFeatured: { type: Boolean, default: false },
   status: { type: String, default: 'active' },
+  metaVerify: { type: String }, // For ownership verification meta tags (e.g. Partnerboost, Impact)
   seoTitle: { type: String },
   seoKeywords: { type: String },
   seoDescription: { type: String },
