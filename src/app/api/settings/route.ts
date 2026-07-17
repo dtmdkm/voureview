@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Setting } from '@/models';
+import { revalidatePath } from 'next/cache';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -28,6 +29,8 @@ export async function POST(request: Request) {
       { value: body.value },
       { upsert: true, new: true }
     );
+    
+    revalidatePath('/', 'layout');
     
     return NextResponse.json(setting);
   } catch (error) {
