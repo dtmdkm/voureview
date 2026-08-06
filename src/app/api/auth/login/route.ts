@@ -6,9 +6,9 @@ export async function POST(request: Request) {
     const { username, password, remember } = await request.json();
 
     const adminUser = (process.env.ADMIN_USERNAME || process.env.ADMIN_USER || 'hoangca').trim();
-    const adminPass = (process.env.ADMIN_PASSWORD || process.env.ADMIN_PASS || 'hoang@123').trim();
+    const adminPass = (process.env.ADMIN_PASSWORD || process.env.ADMIN_PASS || '123456').trim();
 
-    console.log('[LOGIN ATTEMPT]', { providedUser: username, expectedUser: adminUser, providedPassLength: password.length, expectedPassLength: adminPass.length });
+    console.log('[LOGIN ATTEMPT]', { providedUser: username, expectedUser: adminUser, providedPassLength: password.length, expectedPassLength: adminPass.length, passMatch: password === adminPass });
 
     if (username === adminUser && password === adminPass) {
       const maxAge = remember ? 60 * 60 * 24 * 30 : 60 * 60 * 24; // 30 days or 24 hours
