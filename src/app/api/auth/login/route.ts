@@ -5,8 +5,8 @@ export async function POST(request: Request) {
   try {
     const { username, password, remember } = await request.json();
 
-    const adminUser = process.env.ADMIN_USERNAME || process.env.ADMIN_USER || 'admin';
-    const adminPass = process.env.ADMIN_PASSWORD || process.env.ADMIN_PASS || 'bobo2026';
+    const adminUser = (process.env.ADMIN_USERNAME || process.env.ADMIN_USER || 'admin').trim();
+    const adminPass = (process.env.ADMIN_PASSWORD || process.env.ADMIN_PASS || 'bobo2026').trim();
 
     if (username === adminUser && password === adminPass) {
       const maxAge = remember ? 60 * 60 * 24 * 30 : 60 * 60 * 24; // 30 days or 24 hours
